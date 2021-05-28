@@ -1,0 +1,2443 @@
+classdef QLSSv16 < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        QuasiLosslesssystemsimulatorUIFigure  matlab.ui.Figure
+        TabGroup3                       matlab.ui.container.TabGroup
+        OptimizationTab                 matlab.ui.container.Tab
+        DisplayresultsButton            matlab.ui.control.Button
+        ExporttoWorkspaceButton         matlab.ui.control.Button
+        ExporttofileButton              matlab.ui.control.Button
+        RunButton                       matlab.ui.control.Button
+        PlotButton                      matlab.ui.control.Button
+        CavitydesignPanel               matlab.ui.container.Panel
+        TabGroup                        matlab.ui.container.TabGroup
+        PrimarypumpingTab               matlab.ui.container.Tab
+        ForwardCheckBox                 matlab.ui.control.CheckBox
+        BackwardCheckBox                matlab.ui.control.CheckBox
+        SecondarypumpingTab             matlab.ui.container.Tab
+        ForwardCheckBox_2               matlab.ui.control.CheckBox
+        BackwardCheckBox_2              matlab.ui.control.CheckBox
+        FBGsTab                         matlab.ui.container.Tab
+        FBGatbeginningofcavityCheckBox  matlab.ui.control.CheckBox
+        FBGatendofcavityCheckBox        matlab.ui.control.CheckBox
+        LengthSpinnerLabel              matlab.ui.control.Label
+        LengthSpinner                   matlab.ui.control.Spinner
+        SimulationparametersPanel       matlab.ui.container.Panel
+        TabGroup2                       matlab.ui.container.TabGroup
+        PrimarypumpTab                  matlab.ui.container.Tab
+        ForwardPowerEditFieldLabel      matlab.ui.control.Label
+        ForwardPowerEditField           matlab.ui.control.NumericEditField
+        BackwardPowerEditFieldLabel     matlab.ui.control.Label
+        BackwardPowerEditField          matlab.ui.control.NumericEditField
+        WavelengthEditFieldLabel        matlab.ui.control.Label
+        WavelengthEditField             matlab.ui.control.NumericEditField
+        RamangainEditFieldLabel         matlab.ui.control.Label
+        RamangainEditField              matlab.ui.control.NumericEditField
+        BackscatteringEditFieldLabel    matlab.ui.control.Label
+        BackscatteringEditField         matlab.ui.control.NumericEditField
+        AttenuationEditFieldLabel       matlab.ui.control.Label
+        AttenuationEditField            matlab.ui.control.NumericEditField
+        BandwidthEditField_2Label       matlab.ui.control.Label
+        BandwidthEditField_2            matlab.ui.control.NumericEditField
+        SecondaryPumpTab                matlab.ui.container.Tab
+        WavelengthEditField_2Label      matlab.ui.control.Label
+        WavelengthEditField_2           matlab.ui.control.NumericEditField
+        BackwardPowerEditField_2Label   matlab.ui.control.Label
+        BackwardPowerEditField_2        matlab.ui.control.NumericEditField
+        ForwardPowerEditField_2Label    matlab.ui.control.Label
+        ForwardPowerEditField_2         matlab.ui.control.NumericEditField
+        RamangainEditField_2Label       matlab.ui.control.Label
+        RamangainEditField_2            matlab.ui.control.NumericEditField
+        BackscatteringEditField_2Label  matlab.ui.control.Label
+        BackscatteringEditField_2       matlab.ui.control.NumericEditField
+        AttenuationEditField_2Label     matlab.ui.control.Label
+        AttenuationEditField_2          matlab.ui.control.NumericEditField
+        BandwidthEditField_6Label       matlab.ui.control.Label
+        BandwidthEditField_6            matlab.ui.control.NumericEditField
+        SignalTab                       matlab.ui.container.Tab
+        BandwidthEditFieldLabel         matlab.ui.control.Label
+        BandwidthEditField              matlab.ui.control.NumericEditField
+        WavelengthEditField_4Label      matlab.ui.control.Label
+        WavelengthEditField_4           matlab.ui.control.NumericEditField
+        PowerEditFieldLabel             matlab.ui.control.Label
+        PowerEditField                  matlab.ui.control.NumericEditField
+        BackscatteringEditField_3Label  matlab.ui.control.Label
+        BackscatteringEditField_3       matlab.ui.control.NumericEditField
+        AttenuationEditField_3Label     matlab.ui.control.Label
+        AttenuationEditField_3          matlab.ui.control.NumericEditField
+        OthersTab                       matlab.ui.container.Tab
+        TemperatureEditFieldLabel       matlab.ui.control.Label
+        TemperatureEditField            matlab.ui.control.NumericEditField
+        InitialnoiseEditFieldLabel      matlab.ui.control.Label
+        InitialnoiseEditField           matlab.ui.control.NumericEditField
+        R1EditFieldLabel                matlab.ui.control.Label
+        R1EditField                     matlab.ui.control.NumericEditField
+        R2EditFieldLabel                matlab.ui.control.Label
+        R2EditField                     matlab.ui.control.NumericEditField
+        ToleranceEditFieldLabel         matlab.ui.control.Label
+        ToleranceEditField              matlab.ui.control.NumericEditField
+        FBGbandwidthfreqEditFieldLabel  matlab.ui.control.Label
+        FBGbandwidthfreqEditField       matlab.ui.control.NumericEditField
+        RunningLampLabel                matlab.ui.control.Label
+        RunningLamp                     matlab.ui.control.Lamp
+        OptimumSecondarybackwardpumppowerEditFieldLabel  matlab.ui.control.Label
+        OptimumSecondarybackwardpumppowerEditField  matlab.ui.control.EditField
+        OptimumSecondaryforwardpumppowerEditFieldLabel  matlab.ui.control.Label
+        OptimumSecondaryforwardpumppowerEditField  matlab.ui.control.EditField
+        OptimumPrimarybackwardpumppowerEditFieldLabel  matlab.ui.control.Label
+        OptimumPrimarybackwardpumppowerEditField  matlab.ui.control.EditField
+        OptimumPrimaryforwardpumppowerEditFieldLabel  matlab.ui.control.Label
+        OptimumPrimaryforwardpumppowerEditField  matlab.ui.control.EditField
+        AbortButton                     matlab.ui.control.Button
+        UIAxes                          matlab.ui.control.UIAxes
+        SimulationTab                   matlab.ui.container.Tab
+        TabGroup2_2                     matlab.ui.container.TabGroup
+        PrimarypumpTab_2                matlab.ui.container.Tab
+        ForwardPowerEditField_3Label    matlab.ui.control.Label
+        ForwardPowerEditField_3         matlab.ui.control.NumericEditField
+        BackwardPowerEditField_3Label   matlab.ui.control.Label
+        BackwardPowerEditField_3        matlab.ui.control.NumericEditField
+        WavelengthEditField_5Label      matlab.ui.control.Label
+        WavelengthEditField_5           matlab.ui.control.NumericEditField
+        RamangainEditField_3Label       matlab.ui.control.Label
+        RamangainEditField_3            matlab.ui.control.NumericEditField
+        BackscatteringEditField_4Label  matlab.ui.control.Label
+        BackscatteringEditField_4       matlab.ui.control.NumericEditField
+        AttenuationEditField_4Label     matlab.ui.control.Label
+        AttenuationEditField_4          matlab.ui.control.NumericEditField
+        BandwidthEditField_3Label       matlab.ui.control.Label
+        BandwidthEditField_3            matlab.ui.control.NumericEditField
+        SecondaryPumpTab_2              matlab.ui.container.Tab
+        AttenuationEditField_4Label_2   matlab.ui.control.Label
+        AttenuationEditField_7          matlab.ui.control.NumericEditField
+        BackscatteringEditField_4Label_2  matlab.ui.control.Label
+        BackscatteringEditField_7       matlab.ui.control.NumericEditField
+        RamangainEditField_3Label_2     matlab.ui.control.Label
+        RamangainEditField_4            matlab.ui.control.NumericEditField
+        BandwidthEditField_3Label_2     matlab.ui.control.Label
+        BandwidthEditField_5            matlab.ui.control.NumericEditField
+        WavelengthEditField_5Label_2    matlab.ui.control.Label
+        WavelengthEditField_8           matlab.ui.control.NumericEditField
+        BackwardPowerEditField_3Label_2  matlab.ui.control.Label
+        BackwardPowerEditField_4        matlab.ui.control.NumericEditField
+        ForwardPowerEditField_3Label_2  matlab.ui.control.Label
+        ForwardPowerEditField_4         matlab.ui.control.NumericEditField
+        SignalTab_2                     matlab.ui.container.Tab
+        BandwidthEditField_4Label       matlab.ui.control.Label
+        BandwidthEditField_4            matlab.ui.control.NumericEditField
+        WavelengthEditField_7Label      matlab.ui.control.Label
+        WavelengthEditField_7           matlab.ui.control.NumericEditField
+        PowerEditField_2Label           matlab.ui.control.Label
+        PowerEditField_2                matlab.ui.control.NumericEditField
+        BackscatteringEditField_6Label  matlab.ui.control.Label
+        BackscatteringEditField_6       matlab.ui.control.NumericEditField
+        AttenuationEditField_6Label     matlab.ui.control.Label
+        AttenuationEditField_6          matlab.ui.control.NumericEditField
+        FBGsTab_2                       matlab.ui.container.Tab
+        FBGatbeginningofcavityCheckBox_2  matlab.ui.control.CheckBox
+        FBGatendofcavityCheckBox_2      matlab.ui.control.CheckBox
+        R1EditField_2Label              matlab.ui.control.Label
+        R1EditField_2                   matlab.ui.control.NumericEditField
+        R2EditField_2Label              matlab.ui.control.Label
+        R2EditField_2                   matlab.ui.control.NumericEditField
+        BandwidthfreqEditFieldLabel     matlab.ui.control.Label
+        BandwidthfreqEditField          matlab.ui.control.NumericEditField
+        OthersTab_2                     matlab.ui.container.Tab
+        TemperatureEditField_2Label     matlab.ui.control.Label
+        TemperatureEditField_2          matlab.ui.control.NumericEditField
+        InitialnoiseEditField_2Label    matlab.ui.control.Label
+        InitialnoiseEditField_2         matlab.ui.control.NumericEditField
+        ToleranceEditField_2Label       matlab.ui.control.Label
+        ToleranceEditField_2            matlab.ui.control.NumericEditField
+        UIAxes2                         matlab.ui.control.UIAxes
+        StartButton                     matlab.ui.control.Button
+        SaveButton                      matlab.ui.control.Button
+        RunningLamp_2Label              matlab.ui.control.Label
+        RunningLamp_2                   matlab.ui.control.Lamp
+        LengthSpinner_2Label            matlab.ui.control.Label
+        LengthSpinner_2                 matlab.ui.control.Spinner
+        ToWorkspaceButton               matlab.ui.control.Button
+        AbortButton_2                   matlab.ui.control.Button
+    end
+
+    
+    properties (Access = private)
+        Output % Output variables or variables that shall be used by other functions
+        mode % simulation or optimization
+    end  
+    
+    properties (Access = public)
+        %Define some constants
+            h = 6.626e-34; %Plank constant [Js] 
+            Kb = 1.38e-23; %Boltzman constant [m^2 kg s^-2 K^-1]
+            c = 299792458; %Speed of light [m/s]
+            
+            %Get values from UI
+            P1fw 
+            P1bw 
+            P2fw 
+            P2bw 
+            S 
+            N0 
+            
+            R1 
+            R2 
+            
+            lambda1 
+            nu1 
+            g1 
+            epsilon1 
+            alpha1 
+            
+            lambda2 
+            nu2 
+            g2 
+            epsilon2 
+            alpha2 
+            deltalambda2 
+            deltanu2 
+            
+            lambdaS 
+            nuS 
+            epsilonS 
+            alphaS 
+            deltalambdaS 
+            deltanuS 
+            
+            T
+            L
+            tol
+            
+            FBG1 
+            FBG2 
+    end
+    
+    methods (Access = private)
+        
+        function StartUpOp(app)
+            %Get values from UI
+            app.P1fw = app.ForwardPowerEditField.Value;
+            app.P1bw = app.BackwardPowerEditField.Value;
+            app.P2fw = app.ForwardPowerEditField_2.Value;
+            app.P2bw = app.BackwardPowerEditField_2.Value;
+            app.S = app.PowerEditField.Value;
+            app.N0 = app.InitialnoiseEditField.Value;
+            
+            app.FBG1 = app.FBGatbeginningofcavityCheckBox.Value;
+            app.FBG2 = app.FBGatendofcavityCheckBox.Value;
+            app.R1 = app.R1EditField.Value;
+            app.R2 = app.R2EditField.Value;
+            
+            app.lambda1 = app.WavelengthEditField.Value;
+            app.nu1 = app.c/app.lambda1;
+            app.g1 = app.RamangainEditField.Value;
+            app.epsilon1 = app.BackscatteringEditField.Value;
+            app.alpha1 = app.AttenuationEditField.Value;
+            
+            app.lambda2 = app.WavelengthEditField_2.Value;
+            app.nu2 = app.c/app.lambda2;
+            app.g2 = app.RamangainEditField_2.Value;
+            app.epsilon2 = app.BackscatteringEditField_2.Value;
+            app.alpha2 = app.AttenuationEditField_2.Value;
+            app.deltalambda2 = app.BandwidthEditField_6.Value;
+            app.deltanu2 = app.c*app.deltalambda2/(app.lambda2)^2;
+            
+            app.lambdaS = app.WavelengthEditField_4.Value;
+            app.nuS = app.c/app.lambdaS;
+            app.epsilonS = app.BackscatteringEditField_3.Value;
+            app.alphaS = app.AttenuationEditField_3.Value;
+            app.deltalambdaS = app.BandwidthEditField.Value;
+            app.deltanuS = app.c*app.deltalambdaS/(app.lambdaS)^2;
+            
+            app.T = app.TemperatureEditField.Value; % Description
+            app.tol = app.ToleranceEditField.Value;
+            app.L = app.LengthSpinner.Value;
+            
+            
+        end
+        
+        function StartUpSim(app)
+            %Get values from UI
+            app.P1fw = app.ForwardPowerEditField_3.Value;
+            app.P1bw = app.BackwardPowerEditField_3.Value;
+            app.P2fw = app.ForwardPowerEditField_4.Value;
+            app.P2bw = app.BackwardPowerEditField_4.Value;
+            app.S = app.PowerEditField_2.Value;
+            app.N0 = app.InitialnoiseEditField_2.Value;
+            
+            app.FBG1 = app.FBGatbeginningofcavityCheckBox_2.Value;
+            app.FBG2 = app.FBGatendofcavityCheckBox_2.Value;
+            app.R1 = app.R1EditField_2.Value;
+            app.R2 = app.R2EditField_2.Value;
+            
+            app.lambda1 = app.WavelengthEditField_5.Value;
+            app.nu1 = app.c/app.lambda1;
+            app.g1 = app.RamangainEditField_3.Value;
+            app.epsilon1 = app.BackscatteringEditField_4.Value;
+            app.alpha1 = app.AttenuationEditField_4.Value;
+            
+            app.lambda2 = app.WavelengthEditField_8.Value;
+            app.nu2 = app.c/app.lambda2;
+            app.g2 = app.RamangainEditField_4.Value;
+            app.epsilon2 = app.BackscatteringEditField_7.Value;
+            app.alpha2 = app.AttenuationEditField_7.Value;
+            app.deltalambda2 = app.BandwidthEditField_5.Value;
+            app.deltanu2 = app.c*app.deltalambda2/(app.lambda2)^2;
+            
+            app.lambdaS = app.WavelengthEditField_7.Value;
+            app.nuS = app.c/app.lambdaS;
+            app.epsilonS = app.BackscatteringEditField_6.Value;
+            app.alphaS = app.AttenuationEditField_6.Value;
+            app.deltalambdaS = app.BandwidthEditField_4.Value;
+            app.deltanuS = app.c*app.deltalambdaS/(app.lambdaS)^2;
+            
+            app.T = app.TemperatureEditField_2.Value; 
+            app.tol = app.ToleranceEditField_2.Value;
+            app.L = app.LengthSpinner_2.Value;
+  
+        end
+        
+        function SetCase(app)
+            %Defines the pumping scheme based on user input
+            
+            if isequal(app.mode.value,'simulation')
+                pumpmat = [app.P1fw app.P1bw; app.P2fw app.P2bw];
+                pumpmat = logical(pumpmat);
+            else
+                pumpmat = [app.ForwardCheckBox.Value app.BackwardCheckBox.Value;app.ForwardCheckBox_2.Value app.BackwardCheckBox_2.Value];
+            end
+
+            
+            if pumpmat(1,1)
+                if pumpmat(1,2)
+                    if pumpmat(2,1)
+                        caseis = 9; %Double bidirectional (as much, double BD with P2bw = 0)
+                    elseif pumpmat(2,2)
+                        caseis = 9; %Double bidirectional (with P2fw = 0)
+                    else
+                        caseis = 6; %single bidirectional
+                    end
+                elseif pumpmat(2,2)
+                    caseis = 8; %Double FW single BW (maybe with P2fw = 0)
+                elseif pumpmat(2,1)
+                    caseis = 5; %Double FW
+                else
+                    caseis = 4; %Single FW
+                end
+            elseif pumpmat(1,2)
+                if pumpmat(2,1)
+                    caseis = 7; %Double Bw single FW (maybe with P2bw = 0)
+                elseif pumpmat(2,2)
+                    caseis = 3; %Double BW
+                else
+                    caseis = 2; %Single backward
+                end
+            elseif pumpmat(2,1) == false && pumpmat(2,2) == false
+                caseis = 1; %No pumping
+            else
+                error('Invalid configuration. Primary pump should be nonzero if there is a nonzero secondary pump')
+            end
+            
+            app.Output.Case = caseis;
+            
+        end   
+        
+        function newsimplex = AmoebaStep(app,simplex,sortval)
+            %This functions advances one step in the amoeba optimization
+            %algorithm
+            %Algorithm contraction and reflection ADAPTATIVE parameters:
+            n = size(simplex,2); %number of vertices in the simplex
+            alpha = 1; %reflection
+            gamma = 1+2/(n-1); %expansion 
+            rho = 0.75-1/(2*(n-1)); %contraction
+            sigma = 1- 1/(n-1); %shrink
+            
+            %alpha = 1; gamma = 2; rho = 1/2; sigma = 1/2;
+            
+            %First, we sort the vertices of the simplex:
+            %[simplex,sortval] = SortSimplex(app,simplex);
+            H = sortval(length(sortval));
+            Lo = sortval(1);
+            NH = sortval(length(sortval)-1);
+            
+            %Then calculate the centroid, to move the simplex around it
+            centroid = sum(simplex(:,1:(n-1)),2)./(n-1);
+            
+            %Now we define the new point
+            refpoint = centroid + alpha * (centroid - simplex(:,n));
+            refpoint(refpoint < 0) = refpoint(refpoint < 0)*-app.tol;
+            
+            %Evaluate function in new point and reflect, move simplex
+            refval = F(app,refpoint);
+            
+            if refval >= Lo && refval < NH %reflection
+                simplex(:,n) = refpoint;
+                newsimplex = simplex;
+                return
+            end
+            
+            if refval < Lo
+                exppoint = centroid + gamma*(refpoint - centroid);
+                exppoint(exppoint < 0) = exppoint(exppoint < 0)*-app.tol;
+                
+                expval = F(app,exppoint);
+                if expval < refval 
+                    simplex(:,n) = exppoint;
+                    newsimplex = simplex;
+                    return
+                else
+                    simplex(:,n) = refpoint;
+                    newsimplex = simplex;
+                    return
+                end
+            end
+            
+            if refval >= NH && refval < H
+                %outside contraction 
+                outconpoint = centroid + rho * (refpoint - centroid);
+                outconpoint(outconpoint < 0) = outconpoint(outconpoint < 0)*-app.tol;
+                
+                outconval = F(app,outconpoint);
+                if outconval <= refval
+                    simplex(:,n) = outconpoint;
+                    newsimplex = simplex;
+                    return
+                else
+                    %shrink
+                    for ii=2:n
+                        simplex(:,ii) = simplex(:,1) + sigma * (simplex(:,ii)-simplex(:,1));
+                        newsimplex = simplex;
+                        return
+                    end
+                end
+            end
+            
+            if refval >= H
+                %Inside contraction
+                inconpoint = centroid - rho * (refpoint - centroid);
+                inconpoint(inconpoint < 0) = inconpoint(inconpoint < 0)*-app.tol;
+                
+                inconval = F(app,inconpoint);
+                if inconval < refval 
+                    simplex(:,n) = inconpoint;
+                    newsimplex = simplex;
+                    return
+                else
+                    %shrink
+                    for ii=2:n
+                        simplex(:,ii) = simplex(:,1) + sigma * (simplex(:,ii)-simplex(:,1));
+                        newsimplex = simplex;
+                        return
+                    end
+                end
+            end
+            
+        end
+        
+        function val = F(app,point)
+            %Function to calculate the 'cost' function. The further this function is from the optimum
+            %values, the greater the value it returns
+            
+            %Inegration of the model
+            try
+                [x,z] = ShootOp(app,point);
+                x_init = x(:,1); x_end = x(:,size(x,2));
+            catch
+                val = 100 + rand();
+                %disp('Could not find convergence from point')
+                return
+            end
+            
+            caseis = app.Output.Case;
+            
+            %Calculate error 
+            deltaS = abs(x_end(5) - x_init(5))/(x_end(5) + x_init(5));
+            flatness = abs(max(x(5,:)) - min(x(5,:)))/(max(x(5,:)) + min(x(5,:)));
+            
+            val = deltaS + flatness; 
+        end
+
+        function [sortsim,sortval] = SortSimplex(app,simplex)
+            values = zeros(1,size(simplex,2));
+            sortsim = zeros(size(simplex));
+            for ii = 1:size(simplex,2)
+                values(ii) = F(app,simplex(:,ii));
+            end           
+            sortval = sort(values);
+            for ii=1:length(sortval)
+                for jj=1:length(values)
+                    if sortval(ii) == values(jj)
+                        sortsim(:,ii) = simplex(:,jj);
+                    end
+                end
+            end
+            
+        end
+        
+        
+        function simplex = Initialize(app)
+            
+            %This function initializes the program. It takes cavity design
+            %input from user and generates a starting point x0 according to
+            %that.
+            SetCase(app);
+            caseis = app.Output.Case;
+            FBGvec = [app.FBG1 app.FBG2];
+
+            x0 = zeros(1,7);
+            
+            U = zeros(7);
+            e = zeros(7,1);
+            
+            %Choose model and intial conditions based on pumping mode
+            if caseis == 1 % No pumping
+                %Aquí va a ir una función que simplemente resuelve el
+                %modelo dadas las condiciones de contorno y tal que será la
+                %misma que usaré para la parte de simulación
+
+            elseif caseis == 2 % Single BW
+                if FBGvec(2) == true
+                    error('Cavity design incompatibility. Single backward pumping cannot be used with FBG at end of cavity')
+                elseif FBGvec(1) == true
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(1) = x0(2); %Due to reflection at FBG
+                    U(1,1) = 1; e(1) = app.P1bw/2;
+                else
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                end
+                
+                U(2,2) = 1;
+                e(2) = app.P1bw/2; 
+                
+            elseif caseis == 3 % Double BW
+                if FBGvec(2) == true
+                    if FBGvec(1) == false
+                        error('Cavity design incompatibility. This design will lead to single backward pumping at a wrong wavelength')
+                    else
+                        x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                        x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                        x0(3) = x0(4); %Due to reflection at FBG
+                        
+                        U(1,1) = 1; e(1) = app.P2bw/2;
+                    end
+                elseif FBGvec(1) == true
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                    
+                    U(3,3) = 1; e(3) = app.P2bw/2;
+                else
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                end
+                
+                U(2,2) = 1; U(4,4) = 1;
+                e(2) = app.P1bw/2; e(4) = app.P2bw/2;
+                
+                
+            elseif caseis == 4 %Single FW
+                if FBGvec(1) == true
+                    error('Cavity design incompatibility. Single forward pumping cannot be used with FBG at beginning of cavity')
+                elseif FBGvec(2) == true
+                    x0(1) = app.P1fw;
+                    x0(2) = x0(1)*exp(-app.alpha1*app.L);
+                    
+                    U(2,2) = 1; e(2) = app.P1fw/2;
+                else
+                    x0(1) = app.P1fw;
+                end
+
+                U(1,1) = 1;
+                e(1) = app.P1fw/2;
+               
+                
+            elseif caseis == 5 %Double FW
+                if FBGvec(1) == true
+                    if FBGvec(2) == false
+                        error('Cavity design incompatibility. This design will lead to single forward pumping at a wrong wavelength')
+                    else
+                        x0(1) = app.P1fw;
+                        x0(3) = app.P2fw;
+                        x0(4) = x0(3); %Due to reflection at FBg
+                        
+                        U(4,4) = 1; e(4) = app.P2fw/2;
+                    end
+                elseif FBGvec(2) == true
+                    x0(1) = app.P1fw;
+                    x0(3) = app.P2fw;
+                    x0(4) = x0(3)*exp(-app.alpha2*app.L);
+                    
+                    U(4,4) = 1; e(4) = app.P2fw/2;
+                else
+                    x0(1) = app.P1fw;
+                    x0(3) = app.P2fw;
+                end
+                
+                U(1,1) = 1; U(3,3) = 1;
+                e(1) = app.P1fw/2; e(3) = app.P2fw/2;
+                
+
+            elseif caseis == 6 %Single BD
+                if FBGvec(1) == true
+                    if FBGvec(2) == true
+                        error('Cavity design incompatibility. Single bidirectional pumping can only support one FBG (at end or beginning, not both)')
+                    else
+                        warning('Single bidirectional pumping with FBG at beginning is equivalent to single backward pumping with FBG at beginning')
+                        x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                        x0(1) = x0(2); %Due to reflection at FBG
+                        U(1,1) = 1; e(1) = app.P1bw/2;
+                        app.Output.Case = 2;
+                    end
+                elseif FBGvec(2) == true
+                    warning('Single bidirectional pumping with FBG at end is equivalent to single forward pumping with FBG at end')
+                    x0(1) = app.P1fw;
+                    x0(2) = x0(1)*exp(-app.alpha1*app.L); %Due to reflection at FBG
+                    U(2,2) = 1; e(2) = app.P1fw/2;
+                    app.Output.Case = 4;
+                else
+                    x0(1) = app.P1fw;
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    
+                    U(1,1) = 1; U(2,2) = 1;
+                    e(1) = app.P1fw/2; e(2) = app.P1bw/2;
+                end
+
+            elseif caseis == 7 %Double BW single FW
+                if FBGvec(1) == true
+                    warning('Double BW, single FW pumping with FBG at beginning is equivalent to just double BW pumping with FBG at beginning')
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                    
+                    U(3,3) = 1; e(3) = app.P2bw/2;
+                    app.Output.Case = 3;
+                elseif FBGvec(2) == true
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                    
+                    U(3,3) = 1; e(3) = app.P2bw/2;
+                else
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(3) = app.P2fw;
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+    
+                    U(3,3) = 1; U(2,2) = 1; U(4,4) = 1;
+                    e(3) = app.P2fw/2; e(2) = app.P1bw/2; e(4) = app.P2bw/2;
+                end
+                
+                
+                
+            elseif caseis == 8 %Double FW single BW
+                if FBGvec(2) == true 
+                    warning('Double FW, single BW pumping with FBG at end is equivalent to just double FW pumping with FBG at end')
+                    x0(1) = app.P1fw;
+                    x0(3) = app.P2fw;
+                    x0(4) = x0(3); %Due to reflection at FBG
+                    
+                    U(4,4) = 1; e(4) = app.P2fw/2;
+                    app.Output.Case = 5;
+                elseif FBGvec(1) == true
+                    x0(1) = app.P1fw;
+                    x0(3) = app.P2fw;
+                    x0(4) = x0(3); %Due to reflection at FBG
+                else
+                    x0(1) = app.P1fw;
+                    x0(3) = app.P2fw;
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+    
+                    U(1,1) = 1; U(4,4) = 1; U(3,3) = 1;
+                    e(1) = app.P1fw/2; e(4) = app.P2bw/2; e(3) = app.P2fw/2;
+                end
+
+            else %Double BD
+                if FBGvec(1) == true 
+                    x0(1) = app.P1fw;
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(3) = app.P2fw;
+                    x0(4) = x0(3); %Due to reflection at FBG
+                elseif FBGvec(2) == true
+                    x0(1) = app.P1fw;
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                else
+                    x0(1) = app.P1fw;
+                    x0(2) = app.P1bw*exp(-app.alpha1*app.L);
+                    x0(3) = app.P2fw;
+                    x0(4) = app.P2bw*exp(-app.alpha2*app.L);
+                end
+
+                U(1,1) = 1; U(2,2) = 1; U(3,3) = 1; U(4,4) = 1;
+                e(1) = app.P1fw/2; e(2) = app.P1bw/2; e(3) = app.P2fw/2; e(4) = app.P2bw/2;
+                
+            end
+            
+            x0(5) = app.S;
+            x0(6) = app.N0;
+            x0(7) = app.N0*exp(-app.alphaS*app.L);
+            
+            %Now that all considerations regarding the case have been set,
+            %we can build the initial simplex.
+            simplex = x0'; 
+            for i=1:length(x0)
+                simplex(:,i+1) = x0' + e(i).*U(:,i);
+            end
+            %Reduce dimensionality by eliminating unnecessary points of the
+            for ii = 2:size(simplex,2) 
+                if isequal(simplex(:,ii),simplex(:,1))
+                    ind(ii) = false;
+                else
+                    ind(ii) = true;
+                end
+            end
+
+            simplex = [simplex(:,1) simplex(:,ind)];
+            
+        end
+        
+        function simplex = MakeSimplex(app,initpoint)
+            
+            %This function initializes the program. It takes cavity design
+            %input from user and generates a starting point x0 according to
+            %that.
+            SetCase(app);
+            caseis = app.Output.Case;
+            FBGvec = [app.FBG1 app.FBG2];
+            
+            U = zeros(7);
+            e = zeros(7,1);
+            
+            %Choose model and intial conditions based on pumping mode
+            if caseis == 1 % No pumping
+                %Aquí va a ir una función que simplemente resuelve el
+                %modelo dadas las condiciones de contorno y tal que será la
+                %misma que usaré para la parte de simulación
+
+            elseif caseis == 2 % Single BW
+                if FBGvec(2) == true
+                    error('Cavity design incompatibility. Single backward pumping cannot be used with FBG at end of cavity')
+                elseif FBGvec(1) == true
+                    U(1,1) = 1; e(1) = initpoint(2)/2;
+                end
+                
+                U(2,2) = 1;
+                e(2) = initpoint(2)/2; 
+                
+            elseif caseis == 3 % Double BW
+                if FBGvec(2) == true
+                    if FBGvec(1) == false
+                        error('Cavity design incompatibility. This design will lead to single backward pumping at a wrong wavelength')
+                    else
+                        U(1,1) = 1; e(1) = initpoint(4)/2;
+                    end
+                elseif FBGvec(1) == true
+                    U(3,3) = 1; e(3) = initpoint(4)/2;
+                end
+                
+                U(2,2) = 1; U(4,4) = 1;
+                e(2) = initpoint(2)/2; e(4) = initpoint(4)/2;
+                
+                
+            elseif caseis == 4 %Single FW
+                if FBGvec(1) == true
+                    error('Cavity design incompatibility. Single forward pumping cannot be used with FBG at beginning of cavity')
+                elseif FBGvec(2) == true
+                    U(2,2) = 1; e(2) = initpoint(1)/2;
+                end
+
+                U(1,1) = 1;
+                e(1) = initpoint(1)/2;
+               
+                
+            elseif caseis == 5 %Double FW
+                if FBGvec(1) == true
+                    if FBGvec(2) == false
+                        error('Cavity design incompatibility. This design will lead to single forward pumping at a wrong wavelength')
+                    else
+                        U(4,4) = 1; e(4) = initpoint(3)/2;
+                    end
+                elseif FBGvec(2) == true
+                    U(4,4) = 1; e(4) = initpoint(3)/2;
+                end
+                
+                U(1,1) = 1; U(3,3) = 1;
+                e(1) = initpoint(1)/2; e(3) = intpoint(3)/2;
+                
+
+            elseif caseis == 6 %Single BD
+                if FBGvec(1) == true
+                    if FBGvec(2) == true
+                        error('Cavity design incompatibility. Single bidirectional pumping can only support one FBG (at end or beginning, not both)')
+                    else
+                        warning('Single bidirectional pumping with FBG at beginning is equivalent to single backward pumping with FBG at beginning')
+                        U(1,1) = 1; e(1) = initpoint(2)/2;
+                        app.Output.Case = 2;
+                    end
+                elseif FBGvec(2) == true
+                    warning('Single bidirectional pumping with FBG at end is equivalent to single forward pumping with FBG at end')
+                    U(2,2) = 1; e(2) = initpoint(1)/2;
+                    app.Output.Case = 4;
+                else
+                    U(1,1) = 1; U(2,2) = 1;
+                    e(1) = initpoint(1)/2; e(2) = initpoint(2)/2;
+                end
+
+            elseif caseis == 7 %Double BW single FW
+                if FBGvec(1) == true
+                    warning('Double BW, single FW pumping with FBG at beginning is equivalent to just double BW pumping with FBG at beginning')
+                    U(3,3) = 1; e(3) = initpoint(4)/2;
+                    app.Output.Case = 3;
+                elseif FBGvec(2) == true
+                    U(3,3) = 1; e(3) = initpoint(4)/2;
+                else
+                    U(3,3) = 1; U(2,2) = 1; U(4,4) = 1;
+                    e(3) = initpoint(3)/2; e(2) = initpoint(2)/2; e(4) = initpoint(4)/2;
+                end
+                
+                
+                
+            elseif caseis == 8 %Double FW single BW
+                if FBGvec(2) == true 
+                    warning('Double FW, single BW pumping with FBG at end is equivalent to just double FW pumping with FBG at end')
+                    U(4,4) = 1; e(4) = initpoint(3)/2;
+                    app.Output.Case = 5;
+                elseif FBGvec(1) == true
+                    %Nothing
+                else
+                    U(1,1) = 1; U(4,4) = 1; U(3,3) = 1;
+                    e(1) = initpoint(1)/2; e(4) = initpoint(4)/2; e(3) = initpoint(3)/2;
+                end
+
+            else %Double BD
+                U(1,1) = 1; U(2,2) = 1; U(3,3) = 1; U(4,4) = 1;
+                e(1) = initpoint(1)/2; e(2) = initpoint(2)/2; e(3) = initpoint(3)/2; e(4) = initpoint(4)/2;
+                
+            end
+            
+            %Now that all considerations regarding the case have been set,
+            %we can build the initial simplex.
+            simplex = initpoint'; 
+            for i=1:length(initpoint)
+                simplex(:,i+1) = initpoint' + (2*rand()-1)*e(i).*U(:,i);
+            end
+            %Reduce dimensionality by eliminating unnecessary points of the
+            for ii = 2:size(simplex,2) 
+                if isequal(simplex(:,ii),simplex(:,1))
+                    ind(ii) = false;
+                else
+                    ind(ii) = true;
+                end
+            end
+
+            simplex = [simplex(:,1) simplex(:,ind)];
+            
+        end
+        
+        function x0 = MakeGuess(app,point)
+            %This function creates an initial guess of a point given the
+            %boundary conditions, etc.
+            SetCase(app);
+            caseis = app.Output.Case;
+            FBGvec = [app.FBG1 app.FBG2];
+
+            x0 = zeros(7,1);
+            
+            %Choose model and intial conditions based on pumping mode
+            if caseis == 1 % No pumping
+                x0 = point;
+
+            elseif caseis == 2 % Single BW
+                if FBGvec(2) == true
+                    error('Cavity design incompatibility. Single backward pumping cannot be used with FBG at end of cavity')
+                elseif FBGvec(1) == true
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(1) = x0(2); %Due to reflection at FBG
+                else
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                end
+                
+            elseif caseis == 3 % Double BW
+                if FBGvec(2) == true
+                    if FBGvec(1) == false
+                        error('Cavity design incompatibility. This design will lead to single backward pumping at a wrong wavelength')
+                    else
+                        x0(2) = point(2)*exp(-app.alpha1*app.L);
+                        x0(4) = point(4)*exp(-app.alpha2*app.L);
+                        x0(3) = x0(4); %Due to reflection at FBG
+                        
+                    end
+                elseif FBGvec(1) == true
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                else
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                end
+                
+            elseif caseis == 4 %Single FW
+                if FBGvec(1) == true
+                    error('Cavity design incompatibility. Single forward pumping cannot be used with FBG at beginning of cavity')
+                elseif FBGvec(2) == true
+                    x0(1) = point(1);
+                    x0(2) = x0(1)*exp(-app.alpha1*app.L);
+                    
+                else
+                    x0(1) = point(1);
+                end
+
+            elseif caseis == 5 %Double FW
+                if FBGvec(1) == true
+                    if FBGvec(2) == false
+                        error('Cavity design incompatibility. This design will lead to single forward pumping at a wrong wavelength')
+                    else
+                        x0(1) = point(1);
+                        x0(3) = point(3);
+                        x0(4) = x0(3); %Due to reflection at FBg
+                        
+                    end
+                elseif FBGvec(2) == true
+                    x0(1) = point(1);
+                    x0(3) = point(3);
+                    x0(4) = x0(3)*exp(-app.alpha2*app.L);
+
+                else
+                    x0(1) = point(1);
+                    x0(3) = point(3);
+                end
+                
+            elseif caseis == 6 %Single BD
+                if FBGvec(1) == true
+                    if FBGvec(2) == true
+                        error('Cavity design incompatibility. Single bidirectional pumping can only support one FBG (at end or beginning, not both)')
+                    else
+                        warning('Single bidirectional pumping with FBG at beginning is equivalent to single backward pumping with FBG at beginning')
+                        x0(2) = point(2)*exp(-app.alpha1*app.L);
+                        x0(1) = x0(2); %Due to reflection at FBG
+                        app.Output.Case = 2;
+                    end
+                elseif FBGvec(2) == true
+                    warning('Single bidirectional pumping with FBG at end is equivalent to single forward pumping with FBG at end')
+                    x0(1) = point(1);
+                    x0(2) = x0(1)*exp(-app.alpha1*app.L); %Due to reflection at FBG
+                    app.Output.Case = 4;
+                else
+                    x0(1) = point(1);
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    
+                end
+
+            elseif caseis == 7 %Double BW single FW
+                if FBGvec(1) == true
+                    warning('Double BW, single FW pumping with FBG at beginning is equivalent to just double BW pumping with FBG at beginning')
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                    
+                    app.Output.Case = 3;
+                elseif FBGvec(2) == true
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                    
+                else
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(3) = point(3);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+    
+                end
+                
+                
+                
+            elseif caseis == 8 %Double FW single BW
+                if FBGvec(2) == true 
+                    warning('Double FW, single BW pumping with FBG at end is equivalent to just double FW pumping with FBG at end')
+                    x0(1) = point(1);
+                    x0(3) = point(3);
+                    x0(4) = x0(3); %Due to reflection at FBG
+                    
+                    app.Output.Case = 5;
+                elseif FBGvec(1) == true
+                    x0(1) = point(1);
+                    x0(3) = point(3);
+                    x0(4) = x0(3); %Due to reflection at FBG
+                else
+                    x0(1) = point(1);
+                    x0(3) = point(3);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+
+                end
+
+            else %Double BD
+                if FBGvec(1) == true 
+                    x0(1) = point(1);
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(3) = point(3);
+                    x0(4) = x0(3); %Due to reflection at FBG
+                elseif FBGvec(2) == true
+                    x0(1) = point(1);
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                    x0(3) = x0(4); %Due to reflection at FBG
+                else
+                    x0(1) = point(1);
+                    x0(2) = point(2)*exp(-app.alpha1*app.L);
+                    x0(3) = point(3);
+                    x0(4) = point(4)*exp(-app.alpha2*app.L);
+                end
+
+            end
+            
+            x0(5) = point(5);
+            x0(6) = point(6);
+            x0(7) = point(7)*exp(-app.alphaS*app.L);
+            
+        end
+
+        
+        function [x,z] = Shoot(app,x0)
+            %Function that takes an initial guess as input and returns the
+            %nearest point to said guess that satisfies boundary conditions
+            %Define the models
+            FBGvec = [app.FBG1 app.FBG2];
+            if any(FBGvec)
+                app.deltanu2 = app.BandwidthfreqEditField.Value;
+            end
+            
+            %Specify model
+            caseis = app.Output.Case;
+            if caseis == 1|| caseis == 2 || caseis == 4 || caseis == 6
+                odefun = @(z,x) [-app.alpha1*x(1)-(app.nu1*app.g1/app.nuS)*(x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1)))*x(1);
+                                 app.alpha1*x(2)+(app.nu1*app.g1/app.nuS)*(x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1)))*x(2);
+                                 0;
+                                 0;
+                                 -app.alphaS*x(5)+app.g1*(x(1)+x(2))*x(5);
+                                 -app.alphaS*x(6)+app.g1*(x(1)+x(2))*((x(6)+2*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1))))+app.epsilonS*x(7);
+                                 app.alphaS*x(7)-app.g1*(x(1)+x(2))*((x(7)+2*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1))))-app.epsilonS*(x(6)+x(5))];
+           
+                             
+                %Specify Boundary conditions        
+                if FBGvec(1) == false
+                    if FBGvec(2) == false
+                        %No FBGs
+                        bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                            ya(3)
+                                            ya(6) - app.N0
+                                            yb(2) - app.P1bw
+                                            yb(4) - app.P2bw
+                                            yb(7)
+                                            ya(5) - app.S];
+    
+                    else
+                        %FBG only at end of cavity
+                        bcfun = @(ya,yb) [ya(1) - yb(2)
+                                            ya(3) - app.P2fw
+                                            ya(5) - app.S
+                                            ya(6) - app.N0
+                                            yb(4) - app.R2*yb(3)
+                                            yb(7)
+                                            ya(5) - app.S];
+                    end
+                elseif FBGvec(2) == false
+                    %FBG only at beginning of cavity
+                    bcfun = @(ya,yb) [ya(1) - yb(2)
+                                        ya(3) - app.R1*ya(4)
+                                        ya(5) - app.S
+                                        ya(6) - app.N0;
+                                        yb(4) - app.P2bw
+                                        yb(7)
+                                        ya(5) - app.S];
+                else
+                    %FBG at beginning and end of cavity
+                    bcfun = @(ya,yb) [ya(1) - app.R1*ya(2)
+                                        ya(3)
+                                        ya(6) - app.N0
+                                        yb(2) - app.R2*yb(1)
+                                        yb(4)
+                                        yb(7)
+                                        ya(5) - app.S];
+                                            
+                end
+            else
+                odefun = @(z,x) [-app.alpha1*x(1)-(app.g1*app.nu1/app.nu2)*x(1)*(x(3)+x(4)+ ...
+                                 4*app.h*app.nu2*app.deltanu2*(1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1))) + app.epsilon1*x(2);
+                                 app.alpha1*x(2)+(app.g1*app.nu1/app.nu2)*x(2)*(x(3)+x(4)+ ...
+                                 4*app.h*app.nu2*app.deltanu2*(1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1))) - app.epsilon1*x(1);
+                                 -app.alpha2*x(3)+app.g1*(x(3)+2*app.h*app.nu2*app.deltanu2*...
+                                 (1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1)))*(x(1)+x(2)) - (app.g2*app.nu2/app.nuS)*x(3)*...
+                                 (x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS*(1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))...
+                                 + app.epsilon2*x(4);
+                                 app.alpha2*x(4)-app.g1*(x(4)+2*app.h*app.nu2*app.deltanu2*...
+                                 (1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1)))*(x(1)+x(2)) + (app.g2*app.nu2/app.nuS)*x(4)*...
+                                 (x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS*(1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))...
+                                 - app.epsilon2*x(3);
+                                 -app.alphaS*x(5) + app.g2*x(5)*(x(3)+x(4));
+                                 -app.alphaS*x(6)+app.g2*(x(6)+2*app.h*app.nuS*app.deltanuS*...
+                                 (1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))*(x(3)+x(4))+app.epsilonS*x(7);
+                                 app.alphaS*x(7)-app.g2*(x(7)+2*app.h*app.nuS*app.deltanuS*...
+                                 (1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))*(x(3)+x(4))-app.epsilonS*(x(5)+x(6))];
+                                              
+                 
+                %Specify Boundary conditions        
+                
+                if FBGvec(1) == false
+                    if FBGvec(2) == false
+                        %No FBGs
+                        bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                            ya(3) - app.P2fw
+                                            ya(6) - app.N0
+                                            yb(2) - app.P1bw
+                                            yb(4) - app.P2bw
+                                            yb(7)
+                                            ya(5) - app.S];
+    
+                    else
+                        %FBG only at end of cavity
+                        bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                            ya(3) - app.P2fw
+                                            ya(6) - app.N0
+                                            yb(2) - app.P1bw
+                                            yb(4) - app.R2*yb(3)
+                                            yb(7)
+                                            ya(5) - app.S];
+                    end
+                elseif FBGvec(2) == false
+                    %FBG only at beginning of cavity
+                    bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                        ya(3) - app.R1*ya(4)
+                                        ya(6) - app.N0
+                                        yb(2) - app.P1bw
+                                        yb(4) - app.P2bw
+                                        yb(7)
+                                        ya(5) - app.S];
+                else
+                    %FBG at beginning and end of cavity
+                    bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                        ya(3) - app.R1*ya(4)
+                                        ya(6) - app.N0
+                                        yb(2) - app.P1bw
+                                        yb(4) - app.R2*yb(3)
+                                        yb(7)
+                                        ya(5) - app.S];
+                                            
+                end
+            end
+            
+            %Propagate
+            points = 1000;
+            solinit = bvpinit(linspace(0,app.L,points),x0);
+            options = bvpset('RelTol',1e-3);
+            sol = bvp4c(odefun,bcfun,solinit,options);
+            z = sol.x;
+            x = sol.y;
+            iter = 0;
+            maxiter = 100;
+            while any(x(:) < 0)
+                iter = iter + 1;
+                %progress bar
+                prog = 100*iter/maxiter;
+                if mod(prog,10) == 0
+                    disp([num2str(prog) '% completed'])
+                end
+                
+                if iter >= maxiter 
+                    error('convergence could not be reached')
+                    break
+                end
+                solinit = bvpinit(linspace(0,app.L,points),x0.*2.*rand(size(x0)));
+                options = bvpset('RelTol',1e-3);
+                try
+                    sol = bvp4c(odefun,bcfun,solinit,options);
+                catch
+                    disp('Singular Jacobian found')
+                end
+                z = sol.x;
+                x = sol.y;
+            end
+            
+        end
+        
+        function [x,z] = ShootOp(app,point)
+            %Function that takes an initial guess as input and returns the
+            %nearest point to said guess that satisfies boundary conditions
+            %Define the models
+            FBGvec = [app.FBG1 app.FBG2];
+            if any(FBGvec)
+                app.deltanu2 = app.BandwidthfreqEditField.Value;
+            end
+            
+            %Specify model
+            caseis = app.Output.Case;
+            if caseis == 1|| caseis == 2 || caseis == 4 || caseis == 6
+                odefun = @(z,x) [-app.alpha1*x(1)-(app.nu1*app.g1/app.nuS)*(x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1)))*x(1);
+                                 app.alpha1*x(2)+(app.nu1*app.g1/app.nuS)*(x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1)))*x(2);
+                                 0;
+                                 0;
+                                 -app.alphaS*x(5)+app.g1*(x(1)+x(2))*x(5);
+                                 -app.alphaS*x(6)+app.g1*(x(1)+x(2))*((x(6)+2*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1))))+app.epsilonS*x(7);
+                                 app.alphaS*x(7)-app.g1*(x(1)+x(2))*((x(7)+2*app.h*app.nuS*app.deltanuS...
+                                 *(1+1/((exp(app.h*(app.nu1-app.nuS)/(app.Kb*app.T)))-1))))-app.epsilonS*(x(6)+x(5))];
+           
+                             
+                %Specify Boundary conditions        
+                if FBGvec(1) == false
+                    if FBGvec(2) == false
+                        %No FBGs
+                        bcfun = @(ya,yb) [ya(1) - app.P1fw
+                                            ya(3)
+                                            ya(6) - app.N0
+                                            yb(2) - app.P1bw
+                                            yb(4) - app.P2bw
+                                            yb(7)
+                                            ya(5) - app.S];
+    
+                    else
+                        %FBG only at end of cavity
+                        bcfun = @(ya,yb) [ya(1) - yb(2)
+                                            ya(3) - app.P2fw
+                                            ya(5) - app.S
+                                            ya(6) - app.N0
+                                            yb(4) - app.R2*yb(3)
+                                            yb(7)
+                                            ya(5) - app.S];
+                    end
+                elseif FBGvec(2) == false
+                    %FBG only at beginning of cavity
+                    bcfun = @(ya,yb) [ya(1) - yb(2)
+                                        ya(3) - app.R1*ya(4)
+                                        ya(5) - app.S
+                                        ya(6) - app.N0;
+                                        yb(4) - app.P2bw
+                                        yb(7)
+                                        ya(5) - app.S];
+                else
+                    %FBG at beginning and end of cavity
+                    bcfun = @(ya,yb) [ya(1) - app.R1*ya(2)
+                                        ya(3)
+                                        ya(6) - app.N0
+                                        yb(2) - app.R2*yb(1)
+                                        yb(4)
+                                        yb(7)
+                                        ya(5) - app.S];
+                                            
+                end
+            else
+                odefun = @(z,x) [-app.alpha1*x(1)-(app.g1*app.nu1/app.nu2)*x(1)*(x(3)+x(4)+ ...
+                                 4*app.h*app.nu2*app.deltanu2*(1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1))) + app.epsilon1*x(2);
+                                 app.alpha1*x(2)+(app.g1*app.nu1/app.nu2)*x(2)*(x(3)+x(4)+ ...
+                                 4*app.h*app.nu2*app.deltanu2*(1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1))) - app.epsilon1*x(1);
+                                 -app.alpha2*x(3)+app.g1*(x(3)+2*app.h*app.nu2*app.deltanu2*...
+                                 (1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1)))*(x(1)+x(2)) - (app.g2*app.nu2/app.nuS)*x(3)*...
+                                 (x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS*(1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))...
+                                 + app.epsilon2*x(4);
+                                 app.alpha2*x(4)-app.g1*(x(4)+2*app.h*app.nu2*app.deltanu2*...
+                                 (1+1/((exp(app.h*(app.nu1-app.nu2)/(app.Kb*app.T)))-1)))*(x(1)+x(2)) + (app.g2*app.nu2/app.nuS)*x(4)*...
+                                 (x(5)+x(6)+x(7)+4*app.h*app.nuS*app.deltanuS*(1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))...
+                                 - app.epsilon2*x(3);
+                                 -app.alphaS*x(5) + app.g2*x(5)*(x(3)+x(4));
+                                 -app.alphaS*x(6)+app.g2*(x(6)+2*app.h*app.nuS*app.deltanuS*...
+                                 (1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))*(x(3)+x(4))+app.epsilonS*x(7);
+                                 app.alphaS*x(7)-app.g2*(x(7)+2*app.h*app.nuS*app.deltanuS*...
+                                 (1+1/((exp(app.h*(app.nu2-app.nuS)/(app.Kb*app.T)))-1)))*(x(3)+x(4))-app.epsilonS*(x(5)+x(6))];
+                                              
+                 
+                %Specify Boundary conditions        
+                
+                if FBGvec(1) == false
+                    if FBGvec(2) == false
+                        %No FBGs
+                        bcfun = @(ya,yb) [ya(1) - point(1)
+                                            ya(3) - point(3)
+                                            ya(6) - point(6)
+                                            yb(2) - point(2)
+                                            yb(4) - point(4)
+                                            yb(7)
+                                            ya(5) - point(5)];
+    
+                    else
+                        %FBG only at end of cavity
+                        bcfun = @(ya,yb) [ya(1) - point(1)
+                                            ya(3) - point(3)
+                                            ya(6) - point(6)
+                                            yb(2) - point(2)
+                                            yb(4) - app.R2*yb(3)
+                                            yb(7)
+                                            ya(5) - point(5)];
+                    end
+                elseif FBGvec(2) == false
+                    %FBG only at beginning of cavity
+                    bcfun = @(ya,yb) [ya(1) - point(1)
+                                        ya(3) - app.R1*ya(4)
+                                        ya(6) - point(6)
+                                        yb(2) - point(2)
+                                        yb(4) - point(4)
+                                        yb(7)
+                                        ya(5) - point(5)];
+                else
+                    %FBG at beginning and end of cavity
+                    bcfun = @(ya,yb) [ya(1) - point(1)
+                                        ya(3) - app.R1*ya(4)
+                                        ya(6) - point(6)
+                                        yb(2) - point(2)
+                                        yb(4) - app.R2*yb(3)
+                                        yb(7)
+                                        ya(5) - point(5)];
+                                            
+                end
+            end
+            x0 = MakeGuess(app,point);
+            
+            %Propagate
+            npoints = 1000;
+            solinit = bvpinit(linspace(0,app.L,npoints),x0);
+            options = bvpset('RelTol',1e-3);
+            sol = bvp4c(odefun,bcfun,solinit,options);
+            z = sol.x;
+            x = sol.y;
+            iter = 0;
+            maxiter = 100;
+            while any(x(:) < 0)
+                iter = iter + 1;
+                %progress bar
+                prog = 100*iter/maxiter;
+                if mod(prog,10) == 0
+                    disp([num2str(prog) '% completed'])
+                end
+                
+                if iter >= maxiter 
+                    error('convergence could not be reached')
+                    break
+                end
+                solinit = bvpinit(linspace(0,app.L,points),x0.*2.*rand(size(x0)));
+                options = bvpset('RelTol',1e-3);
+                try
+                    sol = bvp4c(odefun,bcfun,solinit,options);
+                catch
+                    disp('Singular Jacobian found')
+                end
+                z = sol.x;
+                x = sol.y;
+            end
+            
+        end
+        
+        
+    end
+    
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: RunButton
+        function RunButtonPushed(app, event)
+            %Change color of lamp to let know simulation has begun
+            app.mode.value = 'optimization';
+            app.Output.abort = false;
+            app.RunningLamp.Color = 'r';
+            drawnow();
+            
+            %Depending on cavity design, define a case to choose a model
+            StartUpOp(app);
+            SetCase(app);
+            caseis = app.Output.Case
+            
+            %Initialize model
+            initpoint = [app.P1fw; app.P1bw; app.P2fw; app.P2bw; app.S; app.N0; 0];
+            simplex = MakeSimplex(app,initpoint')
+            simplex_init = simplex;
+         
+            format long
+            
+            [simplex,sortval] = SortSimplex(app,simplex)
+            
+            D = (sortval(length(sortval))-sortval(1))/(sortval(length(sortval))+sortval(1));
+            Dtol = app.tol;
+           
+            iter = 0;
+            maxiter = 100;
+            kick = 0;
+            maxkick = 10;
+            ftol = app.tol;
+            bestpoints = [];
+            bestfs = [];
+            
+            while kick <= maxkick   
+                Diter = 0;
+                flag = false;
+                kick = kick + 1;
+                while D > Dtol 
+                    Diter = Diter + 1;
+                    iter = iter+1;
+                    if Diter >= maxiter
+                        disp(['Distance convergence could not be reached in kick ' num2str(kick)])
+                        break
+                    end
+
+                    if app.Output.abort == true
+                        app.RunningLamp.Color = 'y';
+                        drawnow()
+                        return
+                    end
+                    
+                    simplex = AmoebaStep(app,simplex,sortval);
+                    
+                    [simplex,sortval] = SortSimplex(app,simplex);
+                    D = (sortval(length(sortval))-sortval(1))/(sortval(length(sortval))+sortval(1));
+                    if abs(sortval(1)) < app.tol
+                        flag = true;
+                        break
+                    end
+      
+                    drawnow();
+
+                end
+                if Diter < maxiter && flag == false
+                    disp(['Distance convergence reached in kick ' num2str(kick) ' after ' num2str(Diter) ' iterations'])
+                elseif flag == true
+                    disp(['tolerance convergence reached in kick ' num2str(kick) ' after ' num2str(Diter) ' iterations'])
+                end
+                
+                %At this point, algorithm should have converged to a simplex.
+                %Now we choose the best point of this simplex. 
+                [sortsim,sortval] = SortSimplex(app,simplex)
+
+                bestfs = [bestfs,sortval(1)];
+                bestpoints = [bestpoints,sortsim(:,1)];
+                
+
+                %'Kick' simplex to start the process over again 
+                simplex = simplex.*2.*rand(size(simplex));
+                simplex(5:7,:) = simplex_init(5:7,:);
+                
+                [simplex,sortval] = SortSimplex(app,simplex);
+                D = (sortval(length(sortval))-sortval(1))/(sortval(length(sortval))+sortval(1));
+
+            end
+        
+           
+            if min(bestfs) < ftol 
+                disp('convergence reached')
+            else 
+                disp('Convergence not reached')
+            end
+            
+            besti = logical(bestfs == min(bestfs));
+            best = bestpoints(:,besti);
+            disp(['number of iterations: ' num2str(iter)])
+            disp(['simplex re-initialized ' num2str(kick) ' times'])
+            disp(['Best point reached in kick ' num2str(besti) ' :' ])
+            bestpoints
+            best
+            
+            %Now use the best point to get results and plot
+            
+            [x,z] = ShootOp(app,best);
+            x_init = x(:,1); x_end = x(:,size(x,2));
+            
+            clf(app.UIAxes);
+            plot(app.UIAxes,z,x(1,:),z,x(2,:),z,x(3,:),z,x(4,:));
+ 
+            results(1) = x_init(1);
+            results(2) = x_end(2);
+            results(3) = x_init(3);
+            results(4) = x_end(4);
+            results(5) = 100*abs(x_end(5) - x_init(5))/app.S;
+            results(6) = x_init(6);
+            results(7) = x_end(7);
+            
+            app.Output.results = results;
+            app.Output.Optval = best;
+            app.Output.x = x;
+            app.Output.z = z;
+            
+            
+            %Change back color of lamp to let know simulation has finished
+            app.RunningLamp.Color = 'g';
+            drawnow();
+
+            
+        end
+
+        % Button pushed function: DisplayresultsButton
+        function DisplayresultsButtonPushed(app, event)
+            results = app.Output.results;
+            results = string(results);
+            for ii=1:length(results)
+                if isequal(results(ii),0)
+                    results(ii) = 'NA';
+                end
+            end
+            P1optfw = results(1);
+            P1optbw = results(2);
+            P2optfw = results(3);
+            P2optbw = results(4);
+            
+            app.OptimumSecondarybackwardpumppowerEditField.Value = P2optbw;
+            app.OptimumSecondaryforwardpumppowerEditField.Value = P2optfw;
+            app.OptimumPrimarybackwardpumppowerEditField.Value = P1optbw;
+            app.OptimumPrimaryforwardpumppowerEditField.Value = P1optfw;
+           
+            drawnow();
+        end
+
+        % Button pushed function: AbortButton
+        function AbortButtonPushed(app, event)
+            app.Output.abort = true;
+            drawnow();
+        end
+
+        % Button pushed function: PlotButton
+        function PlotButtonPushed(app, event)
+            cla(app.UIAxes)
+            
+            caseis = app.Output.Case;
+            z = app.Output.z;
+            x = app.Output.x;
+            
+            if caseis == 1 || caseis == 2 || caseis == 4 || caseis == 6
+                pumping = x(1,:) + x(2,:);
+                pumpingm = 10*log10(pumping.*1e3);
+                xm = 10*log10(x.*1e3);
+                
+                hold(app.UIAxes,'on')
+                plot(app.UIAxes,z./1000,xm(5,:),'LineWidth',2.5)
+                plot(app.UIAxes,z./1000,pumpingm,'LineWidth',2.5)
+                legend(app.UIAxes,'Signal','Pump at \lambda = 1455 nm')  
+                hold(app.UIAxes,'off')
+            else
+                ppumping = x(1,:) + x(2,:);
+                spumping = x(3,:) + x(4,:);
+                ppumpingm = 10*log10(ppumping.*1e3);
+                spumpingm = 10*log10(spumping.*1e3);
+                xm = 10*log10(x.*1e3);
+                
+                hold(app.UIAxes,'on')
+                plot(app.UIAxes,z./1000,xm(5,:),'LineWidth',2.5)
+                plot(app.UIAxes,z./1000,ppumpingm,'LineWidth',2.5)
+                plot(app.UIAxes,z./1000,spumpingm,'LineWidth',2.5)
+                plot(app.UIAxes,z./1000,xm(6,:),'LineWidth',2.5)
+                plot(app.UIAxes,z./1000,xm(7,:),'LineWidth',2.5)
+                %legend(app.UIAxes,'Signal','Primary pump','Secondary pump','Forward noise','Location','northwest')
+                legend(app.UIAxes,'Signal','Pump at \lambda = 1365 nm','Pump at \lambda = 1455 nm','Forward noise','Backward noise','Location','southwest')
+                hold(app.UIAxes,'off')    
+            end
+            drawnow();
+        end
+
+        % Button pushed function: StartButton
+        function StartButtonPushed(app, event)
+            %Change color of lamp to let know simulation has begun
+            app.mode.value = 'simulation';
+            app.Output.abort = false;
+            app.RunningLamp_2.Color = 'r';
+            drawnow();
+            
+            %Depending on cavity design, define a case to choose a model
+            StartUpSim(app);
+            SetCase(app);
+            caseis = app.Output.Case
+            
+            %Initialize model
+            simplex = Initialize(app);
+            x0 = simplex(:,1);
+            
+            %Propagate model
+            [x,z] = Shoot(app,x0);
+            x_end = x(:,size(x,2)); x_init = x(:,1);
+            results(1) = x_init(1);
+            results(2) = x_end(2);
+            results(3) = x_init(3);
+            results(4) = x_end(4);
+            results(5) = 100*abs(x_end(5) - x_init(5))/app.S;
+            results(6) = x_init(6);
+            results(7) = x_end(7);
+            
+            results = results';
+            app.Output.results = results;
+            app.Output.z = z;
+            app.Output.x = x;
+            
+            %Change color of lamp to let know simulation has finished
+            app.RunningLamp_2.Color = 'g';
+            drawnow();
+            
+            %And plot results
+            cla(app.UIAxes2)
+            z = app.Output.z;
+            x = app.Output.x;
+            x = x';
+            
+            if caseis == 1 || caseis == 2 || caseis == 4 || caseis == 6
+                pumping = x(:,1) + x(:,2);
+                pumpingm = 10*log10(pumping.*1e3);
+                xm = 10*log10(x.*1e3);
+                
+                hold(app.UIAxes2,'on')
+                plot(app.UIAxes2,z./1000,xm(:,5),'LineWidth',2.5)
+                plot(app.UIAxes2,z./1000,pumpingm,'LineWidth',2.5)
+                legend(app.UIAxes2,'Signal','Pump')  
+                hold(app.UIAxes2,'off')
+            else
+                ppumping = x(:,1) + x(:,2);
+                spumping = x(:,3) + x(:,4);
+                ppumpingm = 10*log10(ppumping.*1e3);
+                spumpingm = 10*log10(spumping.*1e3);
+                xm = 10*log10(x.*1e3);
+                
+                hold(app.UIAxes2,'on')
+                plot(app.UIAxes2,z./1000,xm(:,5),'LineWidth',2.5)
+                plot(app.UIAxes2,z./1000,ppumpingm,'LineWidth',2.5)
+                plot(app.UIAxes2,z./1000,spumpingm,'LineWidth',2.5)
+                plot(app.UIAxes2,z./1000,xm(:,6),'LineWidth',2.5)
+                plot(app.UIAxes2,z./1000,xm(:,7),'LineWidth',2.5)
+                title(app.UIAxes2,'System evolution')
+                xlabel(app.UIAxes2,'Distance (km)')
+                ylabel(app.UIAxes2,'Power (dBm)')
+                legend(app.UIAxes2,'Signal','Primary pump','Secondary pump','Forward noise','Backward noise','Location','southwest')
+                hold(app.UIAxes2,'off')   
+            end
+            drawnow();
+            
+        end
+
+        % Button pushed function: ExporttoWorkspaceButton
+        function ExporttoWorkspaceButtonPushed(app, event)
+            assignin('base','x',app.Output.x);
+            assignin('base','z',app.Output.z);
+            assignin('base','results',app.Output.results)
+        end
+
+        % Button pushed function: ToWorkspaceButton
+        function ToWorkspaceButtonPushed(app, event)
+            assignin('base','x',app.Output.x);
+            assignin('base','z',app.Output.z);
+            assignin('base','results',app.Output.results)
+        end
+
+        % Button pushed function: AbortButton_2
+        function AbortButton_2Pushed(app, event)
+           app.Output.abort = true;
+            drawnow(); 
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Create QuasiLosslesssystemsimulatorUIFigure and hide until all components are created
+            app.QuasiLosslesssystemsimulatorUIFigure = uifigure('Visible', 'off');
+            app.QuasiLosslesssystemsimulatorUIFigure.Position = [100 100 890 719];
+            app.QuasiLosslesssystemsimulatorUIFigure.Name = 'Quasi-Lossless system simulator';
+
+            % Create TabGroup3
+            app.TabGroup3 = uitabgroup(app.QuasiLosslesssystemsimulatorUIFigure);
+            app.TabGroup3.Position = [17 11 861 693];
+
+            % Create OptimizationTab
+            app.OptimizationTab = uitab(app.TabGroup3);
+            app.OptimizationTab.Title = 'Optimization';
+
+            % Create DisplayresultsButton
+            app.DisplayresultsButton = uibutton(app.OptimizationTab, 'push');
+            app.DisplayresultsButton.ButtonPushedFcn = createCallbackFcn(app, @DisplayresultsButtonPushed, true);
+            app.DisplayresultsButton.Position = [194 47 130 22];
+            app.DisplayresultsButton.Text = 'Display results';
+
+            % Create ExporttoWorkspaceButton
+            app.ExporttoWorkspaceButton = uibutton(app.OptimizationTab, 'push');
+            app.ExporttoWorkspaceButton.ButtonPushedFcn = createCallbackFcn(app, @ExporttoWorkspaceButtonPushed, true);
+            app.ExporttoWorkspaceButton.Position = [194 107 130 22];
+            app.ExporttoWorkspaceButton.Text = 'Export to Workspace';
+
+            % Create ExporttofileButton
+            app.ExporttofileButton = uibutton(app.OptimizationTab, 'push');
+            app.ExporttofileButton.Position = [194 77 130 22];
+            app.ExporttofileButton.Text = 'Export to file';
+
+            % Create RunButton
+            app.RunButton = uibutton(app.OptimizationTab, 'push');
+            app.RunButton.ButtonPushedFcn = createCallbackFcn(app, @RunButtonPushed, true);
+            app.RunButton.Position = [34 107 130 22];
+            app.RunButton.Text = 'Run';
+
+            % Create PlotButton
+            app.PlotButton = uibutton(app.OptimizationTab, 'push');
+            app.PlotButton.ButtonPushedFcn = createCallbackFcn(app, @PlotButtonPushed, true);
+            app.PlotButton.Position = [34 77 130 22];
+            app.PlotButton.Text = 'Plot';
+
+            % Create CavitydesignPanel
+            app.CavitydesignPanel = uipanel(app.OptimizationTab);
+            app.CavitydesignPanel.Title = 'Cavity design';
+            app.CavitydesignPanel.Position = [23 454 380 200];
+
+            % Create TabGroup
+            app.TabGroup = uitabgroup(app.CavitydesignPanel);
+            app.TabGroup.Position = [11 70 352 100];
+
+            % Create PrimarypumpingTab
+            app.PrimarypumpingTab = uitab(app.TabGroup);
+            app.PrimarypumpingTab.Title = 'Primary pumping';
+
+            % Create ForwardCheckBox
+            app.ForwardCheckBox = uicheckbox(app.PrimarypumpingTab);
+            app.ForwardCheckBox.Text = 'Forward';
+            app.ForwardCheckBox.Position = [10 48 66 22];
+
+            % Create BackwardCheckBox
+            app.BackwardCheckBox = uicheckbox(app.PrimarypumpingTab);
+            app.BackwardCheckBox.Text = 'Backward';
+            app.BackwardCheckBox.Position = [10 18 75 22];
+
+            % Create SecondarypumpingTab
+            app.SecondarypumpingTab = uitab(app.TabGroup);
+            app.SecondarypumpingTab.Title = 'Secondary pumping';
+
+            % Create ForwardCheckBox_2
+            app.ForwardCheckBox_2 = uicheckbox(app.SecondarypumpingTab);
+            app.ForwardCheckBox_2.Text = 'Forward';
+            app.ForwardCheckBox_2.Position = [10 48 66 22];
+
+            % Create BackwardCheckBox_2
+            app.BackwardCheckBox_2 = uicheckbox(app.SecondarypumpingTab);
+            app.BackwardCheckBox_2.Text = 'Backward';
+            app.BackwardCheckBox_2.Position = [10 18 75 22];
+
+            % Create FBGsTab
+            app.FBGsTab = uitab(app.TabGroup);
+            app.FBGsTab.Title = 'FBGs';
+
+            % Create FBGatbeginningofcavityCheckBox
+            app.FBGatbeginningofcavityCheckBox = uicheckbox(app.FBGsTab);
+            app.FBGatbeginningofcavityCheckBox.Text = 'FBG at beginning of cavity';
+            app.FBGatbeginningofcavityCheckBox.Position = [10 48 163 22];
+
+            % Create FBGatendofcavityCheckBox
+            app.FBGatendofcavityCheckBox = uicheckbox(app.FBGsTab);
+            app.FBGatendofcavityCheckBox.Text = 'FBG at end of cavity';
+            app.FBGatendofcavityCheckBox.Position = [10 18 131 22];
+
+            % Create LengthSpinnerLabel
+            app.LengthSpinnerLabel = uilabel(app.CavitydesignPanel);
+            app.LengthSpinnerLabel.HorizontalAlignment = 'right';
+            app.LengthSpinnerLabel.Position = [16 28 42 22];
+            app.LengthSpinnerLabel.Text = 'Length';
+
+            % Create LengthSpinner
+            app.LengthSpinner = uispinner(app.CavitydesignPanel);
+            app.LengthSpinner.Limits = [0 Inf];
+            app.LengthSpinner.Position = [73 28 97 22];
+            app.LengthSpinner.Value = 100000;
+
+            % Create SimulationparametersPanel
+            app.SimulationparametersPanel = uipanel(app.OptimizationTab);
+            app.SimulationparametersPanel.Title = 'Simulation parameters';
+            app.SimulationparametersPanel.Position = [423 454 420 200];
+
+            % Create TabGroup2
+            app.TabGroup2 = uitabgroup(app.SimulationparametersPanel);
+            app.TabGroup2.Position = [11 10 400 160];
+
+            % Create PrimarypumpTab
+            app.PrimarypumpTab = uitab(app.TabGroup2);
+            app.PrimarypumpTab.Title = 'Primary pump';
+
+            % Create ForwardPowerEditFieldLabel
+            app.ForwardPowerEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.ForwardPowerEditFieldLabel.Position = [13 103 87 22];
+            app.ForwardPowerEditFieldLabel.Text = 'Forward Power';
+
+            % Create ForwardPowerEditField
+            app.ForwardPowerEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.ForwardPowerEditField.Position = [113 103 80 22];
+
+            % Create BackwardPowerEditFieldLabel
+            app.BackwardPowerEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.BackwardPowerEditFieldLabel.Position = [13 73 95 22];
+            app.BackwardPowerEditFieldLabel.Text = 'Backward Power';
+
+            % Create BackwardPowerEditField
+            app.BackwardPowerEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.BackwardPowerEditField.Position = [113 73 81 22];
+
+            % Create WavelengthEditFieldLabel
+            app.WavelengthEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.WavelengthEditFieldLabel.Position = [11 43 68 22];
+            app.WavelengthEditFieldLabel.Text = 'Wavelength';
+
+            % Create WavelengthEditField
+            app.WavelengthEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.WavelengthEditField.Position = [111 43 83 22];
+            app.WavelengthEditField.Value = 1366;
+
+            % Create RamangainEditFieldLabel
+            app.RamangainEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.RamangainEditFieldLabel.Position = [213 103 70 22];
+            app.RamangainEditFieldLabel.Text = 'Raman gain';
+
+            % Create RamangainEditField
+            app.RamangainEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.RamangainEditField.Position = [303 103 78 22];
+            app.RamangainEditField.Value = 0.00053;
+
+            % Create BackscatteringEditFieldLabel
+            app.BackscatteringEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.BackscatteringEditFieldLabel.Position = [211 63 84 22];
+            app.BackscatteringEditFieldLabel.Text = 'Backscattering';
+
+            % Create BackscatteringEditField
+            app.BackscatteringEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.BackscatteringEditField.Position = [301 63 78 22];
+            app.BackscatteringEditField.Value = 1e-07;
+
+            % Create AttenuationEditFieldLabel
+            app.AttenuationEditFieldLabel = uilabel(app.PrimarypumpTab);
+            app.AttenuationEditFieldLabel.Position = [211 23 66 22];
+            app.AttenuationEditFieldLabel.Text = 'Attenuation';
+
+            % Create AttenuationEditField
+            app.AttenuationEditField = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.AttenuationEditField.Position = [301 23 78 22];
+            app.AttenuationEditField.Value = 8.7e-05;
+
+            % Create BandwidthEditField_2Label
+            app.BandwidthEditField_2Label = uilabel(app.PrimarypumpTab);
+            app.BandwidthEditField_2Label.Position = [11 13 65 22];
+            app.BandwidthEditField_2Label.Text = 'Bandwidth ';
+
+            % Create BandwidthEditField_2
+            app.BandwidthEditField_2 = uieditfield(app.PrimarypumpTab, 'numeric');
+            app.BandwidthEditField_2.Position = [111 13 83 22];
+            app.BandwidthEditField_2.Value = 8e-09;
+
+            % Create SecondaryPumpTab
+            app.SecondaryPumpTab = uitab(app.TabGroup2);
+            app.SecondaryPumpTab.Title = 'Secondary Pump';
+
+            % Create WavelengthEditField_2Label
+            app.WavelengthEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.WavelengthEditField_2Label.Position = [11 43 68 22];
+            app.WavelengthEditField_2Label.Text = 'Wavelength';
+
+            % Create WavelengthEditField_2
+            app.WavelengthEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.WavelengthEditField_2.Position = [111 43 83 22];
+            app.WavelengthEditField_2.Value = 1455;
+
+            % Create BackwardPowerEditField_2Label
+            app.BackwardPowerEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.BackwardPowerEditField_2Label.Position = [13 73 95 22];
+            app.BackwardPowerEditField_2Label.Text = 'Backward Power';
+
+            % Create BackwardPowerEditField_2
+            app.BackwardPowerEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.BackwardPowerEditField_2.Position = [113 73 81 22];
+
+            % Create ForwardPowerEditField_2Label
+            app.ForwardPowerEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.ForwardPowerEditField_2Label.Position = [13 103 87 22];
+            app.ForwardPowerEditField_2Label.Text = 'Forward Power';
+
+            % Create ForwardPowerEditField_2
+            app.ForwardPowerEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.ForwardPowerEditField_2.Position = [113 103 80 22];
+
+            % Create RamangainEditField_2Label
+            app.RamangainEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.RamangainEditField_2Label.Position = [213 103 70 22];
+            app.RamangainEditField_2Label.Text = 'Raman gain';
+
+            % Create RamangainEditField_2
+            app.RamangainEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.RamangainEditField_2.Position = [303 103 78 22];
+            app.RamangainEditField_2.Value = 0.00043;
+
+            % Create BackscatteringEditField_2Label
+            app.BackscatteringEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.BackscatteringEditField_2Label.Position = [213 73 84 22];
+            app.BackscatteringEditField_2Label.Text = 'Backscattering';
+
+            % Create BackscatteringEditField_2
+            app.BackscatteringEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.BackscatteringEditField_2.Position = [303 73 78 22];
+            app.BackscatteringEditField_2.Value = 6e-08;
+
+            % Create AttenuationEditField_2Label
+            app.AttenuationEditField_2Label = uilabel(app.SecondaryPumpTab);
+            app.AttenuationEditField_2Label.Position = [213 43 66 22];
+            app.AttenuationEditField_2Label.Text = 'Attenuation';
+
+            % Create AttenuationEditField_2
+            app.AttenuationEditField_2 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.AttenuationEditField_2.Position = [303 43 78 22];
+            app.AttenuationEditField_2.Value = 6.2e-05;
+
+            % Create BandwidthEditField_6Label
+            app.BandwidthEditField_6Label = uilabel(app.SecondaryPumpTab);
+            app.BandwidthEditField_6Label.Position = [11 13 65 22];
+            app.BandwidthEditField_6Label.Text = 'Bandwidth ';
+
+            % Create BandwidthEditField_6
+            app.BandwidthEditField_6 = uieditfield(app.SecondaryPumpTab, 'numeric');
+            app.BandwidthEditField_6.Position = [111 13 83 22];
+            app.BandwidthEditField_6.Value = 8e-09;
+
+            % Create SignalTab
+            app.SignalTab = uitab(app.TabGroup2);
+            app.SignalTab.Title = 'Signal';
+
+            % Create BandwidthEditFieldLabel
+            app.BandwidthEditFieldLabel = uilabel(app.SignalTab);
+            app.BandwidthEditFieldLabel.Position = [11 33 62 22];
+            app.BandwidthEditFieldLabel.Text = 'Bandwidth';
+
+            % Create BandwidthEditField
+            app.BandwidthEditField = uieditfield(app.SignalTab, 'numeric');
+            app.BandwidthEditField.Position = [111 33 83 22];
+            app.BandwidthEditField.Value = 1e-10;
+
+            % Create WavelengthEditField_4Label
+            app.WavelengthEditField_4Label = uilabel(app.SignalTab);
+            app.WavelengthEditField_4Label.Position = [13 63 68 22];
+            app.WavelengthEditField_4Label.Text = 'Wavelength';
+
+            % Create WavelengthEditField_4
+            app.WavelengthEditField_4 = uieditfield(app.SignalTab, 'numeric');
+            app.WavelengthEditField_4.Position = [113 63 81 22];
+            app.WavelengthEditField_4.Value = 1550;
+
+            % Create PowerEditFieldLabel
+            app.PowerEditFieldLabel = uilabel(app.SignalTab);
+            app.PowerEditFieldLabel.Position = [13 93 70 22];
+            app.PowerEditFieldLabel.Text = 'Power';
+
+            % Create PowerEditField
+            app.PowerEditField = uieditfield(app.SignalTab, 'numeric');
+            app.PowerEditField.Position = [113 93 80 22];
+            app.PowerEditField.Value = 0.001;
+
+            % Create BackscatteringEditField_3Label
+            app.BackscatteringEditField_3Label = uilabel(app.SignalTab);
+            app.BackscatteringEditField_3Label.Position = [211 83 84 22];
+            app.BackscatteringEditField_3Label.Text = 'Backscattering';
+
+            % Create BackscatteringEditField_3
+            app.BackscatteringEditField_3 = uieditfield(app.SignalTab, 'numeric');
+            app.BackscatteringEditField_3.Position = [301 83 78 22];
+            app.BackscatteringEditField_3.Value = 4.3e-08;
+
+            % Create AttenuationEditField_3Label
+            app.AttenuationEditField_3Label = uilabel(app.SignalTab);
+            app.AttenuationEditField_3Label.Position = [211 43 66 22];
+            app.AttenuationEditField_3Label.Text = 'Attenuation';
+
+            % Create AttenuationEditField_3
+            app.AttenuationEditField_3 = uieditfield(app.SignalTab, 'numeric');
+            app.AttenuationEditField_3.Position = [301 43 78 22];
+            app.AttenuationEditField_3.Value = 4.4e-05;
+
+            % Create OthersTab
+            app.OthersTab = uitab(app.TabGroup2);
+            app.OthersTab.Title = 'Others';
+
+            % Create TemperatureEditFieldLabel
+            app.TemperatureEditFieldLabel = uilabel(app.OthersTab);
+            app.TemperatureEditFieldLabel.Position = [11 93 73 22];
+            app.TemperatureEditFieldLabel.Text = 'Temperature';
+
+            % Create TemperatureEditField
+            app.TemperatureEditField = uieditfield(app.OthersTab, 'numeric');
+            app.TemperatureEditField.Position = [111 93 58 22];
+            app.TemperatureEditField.Value = 298;
+
+            % Create InitialnoiseEditFieldLabel
+            app.InitialnoiseEditFieldLabel = uilabel(app.OthersTab);
+            app.InitialnoiseEditFieldLabel.Position = [11 53 66 22];
+            app.InitialnoiseEditFieldLabel.Text = 'Initial noise';
+
+            % Create InitialnoiseEditField
+            app.InitialnoiseEditField = uieditfield(app.OthersTab, 'numeric');
+            app.InitialnoiseEditField.Position = [111 53 58 22];
+            app.InitialnoiseEditField.Value = 1e-06;
+
+            % Create R1EditFieldLabel
+            app.R1EditFieldLabel = uilabel(app.OthersTab);
+            app.R1EditFieldLabel.Position = [231 57 25 22];
+            app.R1EditFieldLabel.Text = 'R1';
+
+            % Create R1EditField
+            app.R1EditField = uieditfield(app.OthersTab, 'numeric');
+            app.R1EditField.Position = [319 57 62 22];
+            app.R1EditField.Value = 0.99;
+
+            % Create R2EditFieldLabel
+            app.R2EditFieldLabel = uilabel(app.OthersTab);
+            app.R2EditFieldLabel.Position = [231 18 25 22];
+            app.R2EditFieldLabel.Text = 'R2';
+
+            % Create R2EditField
+            app.R2EditField = uieditfield(app.OthersTab, 'numeric');
+            app.R2EditField.Position = [319 18 62 22];
+            app.R2EditField.Value = 0.99;
+
+            % Create ToleranceEditFieldLabel
+            app.ToleranceEditFieldLabel = uilabel(app.OthersTab);
+            app.ToleranceEditFieldLabel.Position = [11 13 58 22];
+            app.ToleranceEditFieldLabel.Text = 'Tolerance';
+
+            % Create ToleranceEditField
+            app.ToleranceEditField = uieditfield(app.OthersTab, 'numeric');
+            app.ToleranceEditField.Position = [111 13 58 22];
+            app.ToleranceEditField.Value = 0.001;
+
+            % Create FBGbandwidthfreqEditFieldLabel
+            app.FBGbandwidthfreqEditFieldLabel = uilabel(app.OthersTab);
+            app.FBGbandwidthfreqEditFieldLabel.HorizontalAlignment = 'right';
+            app.FBGbandwidthfreqEditFieldLabel.Position = [188 93 120 22];
+            app.FBGbandwidthfreqEditFieldLabel.Text = 'FBG bandwidth (freq.)';
+
+            % Create FBGbandwidthfreqEditField
+            app.FBGbandwidthfreqEditField = uieditfield(app.OthersTab, 'numeric');
+            app.FBGbandwidthfreqEditField.Position = [319 93 62 22];
+            app.FBGbandwidthfreqEditField.Value = 125000000000;
+
+            % Create RunningLampLabel
+            app.RunningLampLabel = uilabel(app.OptimizationTab);
+            app.RunningLampLabel.HorizontalAlignment = 'right';
+            app.RunningLampLabel.Position = [363 56 50 22];
+            app.RunningLampLabel.Text = 'Running';
+
+            % Create RunningLamp
+            app.RunningLamp = uilamp(app.OptimizationTab);
+            app.RunningLamp.Position = [428 56 20 20];
+
+            % Create OptimumSecondarybackwardpumppowerEditFieldLabel
+            app.OptimumSecondarybackwardpumppowerEditFieldLabel = uilabel(app.OptimizationTab);
+            app.OptimumSecondarybackwardpumppowerEditFieldLabel.Position = [494 17 241 22];
+            app.OptimumSecondarybackwardpumppowerEditFieldLabel.Text = 'Optimum Secondary backward pump power';
+
+            % Create OptimumSecondarybackwardpumppowerEditField
+            app.OptimumSecondarybackwardpumppowerEditField = uieditfield(app.OptimizationTab, 'text');
+            app.OptimumSecondarybackwardpumppowerEditField.Position = [764 17 80 22];
+
+            % Create OptimumSecondaryforwardpumppowerEditFieldLabel
+            app.OptimumSecondaryforwardpumppowerEditFieldLabel = uilabel(app.OptimizationTab);
+            app.OptimumSecondaryforwardpumppowerEditFieldLabel.Position = [494 47 229 22];
+            app.OptimumSecondaryforwardpumppowerEditFieldLabel.Text = 'Optimum Secondary forward pump power';
+
+            % Create OptimumSecondaryforwardpumppowerEditField
+            app.OptimumSecondaryforwardpumppowerEditField = uieditfield(app.OptimizationTab, 'text');
+            app.OptimumSecondaryforwardpumppowerEditField.Position = [764 47 80 22];
+
+            % Create OptimumPrimarybackwardpumppowerEditFieldLabel
+            app.OptimumPrimarybackwardpumppowerEditFieldLabel = uilabel(app.OptimizationTab);
+            app.OptimumPrimarybackwardpumppowerEditFieldLabel.Position = [494 77 225 22];
+            app.OptimumPrimarybackwardpumppowerEditFieldLabel.Text = 'Optimum Primary backward pump power';
+
+            % Create OptimumPrimarybackwardpumppowerEditField
+            app.OptimumPrimarybackwardpumppowerEditField = uieditfield(app.OptimizationTab, 'text');
+            app.OptimumPrimarybackwardpumppowerEditField.Position = [764 77 80 22];
+
+            % Create OptimumPrimaryforwardpumppowerEditFieldLabel
+            app.OptimumPrimaryforwardpumppowerEditFieldLabel = uilabel(app.OptimizationTab);
+            app.OptimumPrimaryforwardpumppowerEditFieldLabel.Position = [494 107 212 22];
+            app.OptimumPrimaryforwardpumppowerEditFieldLabel.Text = 'Optimum Primary forward pump power';
+
+            % Create OptimumPrimaryforwardpumppowerEditField
+            app.OptimumPrimaryforwardpumppowerEditField = uieditfield(app.OptimizationTab, 'text');
+            app.OptimumPrimaryforwardpumppowerEditField.Position = [764 107 80 22];
+
+            % Create AbortButton
+            app.AbortButton = uibutton(app.OptimizationTab, 'push');
+            app.AbortButton.ButtonPushedFcn = createCallbackFcn(app, @AbortButtonPushed, true);
+            app.AbortButton.BusyAction = 'cancel';
+            app.AbortButton.Position = [342 107 130 22];
+            app.AbortButton.Text = 'Abort ';
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.OptimizationTab);
+            title(app.UIAxes, 'Title')
+            xlabel(app.UIAxes, 'X')
+            ylabel(app.UIAxes, 'Y')
+            app.UIAxes.PlotBoxAspectRatio = [3.6328125 1 1];
+            app.UIAxes.Position = [23 147 820 295];
+
+            % Create SimulationTab
+            app.SimulationTab = uitab(app.TabGroup3);
+            app.SimulationTab.Title = 'Simulation';
+
+            % Create TabGroup2_2
+            app.TabGroup2_2 = uitabgroup(app.SimulationTab);
+            app.TabGroup2_2.Position = [30 546 802 106];
+
+            % Create PrimarypumpTab_2
+            app.PrimarypumpTab_2 = uitab(app.TabGroup2_2);
+            app.PrimarypumpTab_2.Title = 'Primary pump';
+
+            % Create ForwardPowerEditField_3Label
+            app.ForwardPowerEditField_3Label = uilabel(app.PrimarypumpTab_2);
+            app.ForwardPowerEditField_3Label.Position = [12 49 87 22];
+            app.ForwardPowerEditField_3Label.Text = 'Forward Power';
+
+            % Create ForwardPowerEditField_3
+            app.ForwardPowerEditField_3 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.ForwardPowerEditField_3.Position = [112 49 80 22];
+
+            % Create BackwardPowerEditField_3Label
+            app.BackwardPowerEditField_3Label = uilabel(app.PrimarypumpTab_2);
+            app.BackwardPowerEditField_3Label.Position = [211 49 95 22];
+            app.BackwardPowerEditField_3Label.Text = 'Backward Power';
+
+            % Create BackwardPowerEditField_3
+            app.BackwardPowerEditField_3 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.BackwardPowerEditField_3.Position = [311 49 81 22];
+
+            % Create WavelengthEditField_5Label
+            app.WavelengthEditField_5Label = uilabel(app.PrimarypumpTab_2);
+            app.WavelengthEditField_5Label.Position = [407 49 68 22];
+            app.WavelengthEditField_5Label.Text = 'Wavelength';
+
+            % Create WavelengthEditField_5
+            app.WavelengthEditField_5 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.WavelengthEditField_5.Position = [507 49 83 22];
+            app.WavelengthEditField_5.Value = 1366;
+
+            % Create RamangainEditField_3Label
+            app.RamangainEditField_3Label = uilabel(app.PrimarypumpTab_2);
+            app.RamangainEditField_3Label.Position = [12 15 70 22];
+            app.RamangainEditField_3Label.Text = 'Raman gain';
+
+            % Create RamangainEditField_3
+            app.RamangainEditField_3 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.RamangainEditField_3.Position = [102 15 90 22];
+            app.RamangainEditField_3.Value = 0.00053;
+
+            % Create BackscatteringEditField_4Label
+            app.BackscatteringEditField_4Label = uilabel(app.PrimarypumpTab_2);
+            app.BackscatteringEditField_4Label.Position = [211 15 84 22];
+            app.BackscatteringEditField_4Label.Text = 'Backscattering';
+
+            % Create BackscatteringEditField_4
+            app.BackscatteringEditField_4 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.BackscatteringEditField_4.Position = [301 15 91 22];
+            app.BackscatteringEditField_4.Value = 1e-07;
+
+            % Create AttenuationEditField_4Label
+            app.AttenuationEditField_4Label = uilabel(app.PrimarypumpTab_2);
+            app.AttenuationEditField_4Label.Position = [407 15 66 22];
+            app.AttenuationEditField_4Label.Text = 'Attenuation';
+
+            % Create AttenuationEditField_4
+            app.AttenuationEditField_4 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.AttenuationEditField_4.Position = [497 15 78 22];
+            app.AttenuationEditField_4.Value = 8.7e-05;
+
+            % Create BandwidthEditField_3Label
+            app.BandwidthEditField_3Label = uilabel(app.PrimarypumpTab_2);
+            app.BandwidthEditField_3Label.Position = [606 49 65 22];
+            app.BandwidthEditField_3Label.Text = 'Bandwidth ';
+
+            % Create BandwidthEditField_3
+            app.BandwidthEditField_3 = uieditfield(app.PrimarypumpTab_2, 'numeric');
+            app.BandwidthEditField_3.Position = [706 49 83 22];
+            app.BandwidthEditField_3.Value = 8e-09;
+
+            % Create SecondaryPumpTab_2
+            app.SecondaryPumpTab_2 = uitab(app.TabGroup2_2);
+            app.SecondaryPumpTab_2.Title = 'Secondary Pump';
+
+            % Create AttenuationEditField_4Label_2
+            app.AttenuationEditField_4Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.AttenuationEditField_4Label_2.Position = [407 15 66 22];
+            app.AttenuationEditField_4Label_2.Text = 'Attenuation';
+
+            % Create AttenuationEditField_7
+            app.AttenuationEditField_7 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.AttenuationEditField_7.Position = [497 15 78 22];
+            app.AttenuationEditField_7.Value = 6.2e-05;
+
+            % Create BackscatteringEditField_4Label_2
+            app.BackscatteringEditField_4Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.BackscatteringEditField_4Label_2.Position = [211 15 84 22];
+            app.BackscatteringEditField_4Label_2.Text = 'Backscattering';
+
+            % Create BackscatteringEditField_7
+            app.BackscatteringEditField_7 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.BackscatteringEditField_7.Position = [301 15 91 22];
+            app.BackscatteringEditField_7.Value = 6e-08;
+
+            % Create RamangainEditField_3Label_2
+            app.RamangainEditField_3Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.RamangainEditField_3Label_2.Position = [12 15 70 22];
+            app.RamangainEditField_3Label_2.Text = 'Raman gain';
+
+            % Create RamangainEditField_4
+            app.RamangainEditField_4 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.RamangainEditField_4.Position = [102 15 90 22];
+            app.RamangainEditField_4.Value = 0.00043;
+
+            % Create BandwidthEditField_3Label_2
+            app.BandwidthEditField_3Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.BandwidthEditField_3Label_2.Position = [606 49 65 22];
+            app.BandwidthEditField_3Label_2.Text = 'Bandwidth ';
+
+            % Create BandwidthEditField_5
+            app.BandwidthEditField_5 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.BandwidthEditField_5.Position = [706 49 83 22];
+            app.BandwidthEditField_5.Value = 8e-09;
+
+            % Create WavelengthEditField_5Label_2
+            app.WavelengthEditField_5Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.WavelengthEditField_5Label_2.Position = [407 49 68 22];
+            app.WavelengthEditField_5Label_2.Text = 'Wavelength';
+
+            % Create WavelengthEditField_8
+            app.WavelengthEditField_8 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.WavelengthEditField_8.Position = [507 49 83 22];
+            app.WavelengthEditField_8.Value = 1455;
+
+            % Create BackwardPowerEditField_3Label_2
+            app.BackwardPowerEditField_3Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.BackwardPowerEditField_3Label_2.Position = [211 49 95 22];
+            app.BackwardPowerEditField_3Label_2.Text = 'Backward Power';
+
+            % Create BackwardPowerEditField_4
+            app.BackwardPowerEditField_4 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.BackwardPowerEditField_4.Position = [311 49 81 22];
+
+            % Create ForwardPowerEditField_3Label_2
+            app.ForwardPowerEditField_3Label_2 = uilabel(app.SecondaryPumpTab_2);
+            app.ForwardPowerEditField_3Label_2.Position = [12 49 87 22];
+            app.ForwardPowerEditField_3Label_2.Text = 'Forward Power';
+
+            % Create ForwardPowerEditField_4
+            app.ForwardPowerEditField_4 = uieditfield(app.SecondaryPumpTab_2, 'numeric');
+            app.ForwardPowerEditField_4.Position = [112 49 80 22];
+
+            % Create SignalTab_2
+            app.SignalTab_2 = uitab(app.TabGroup2_2);
+            app.SignalTab_2.Title = 'Signal';
+
+            % Create BandwidthEditField_4Label
+            app.BandwidthEditField_4Label = uilabel(app.SignalTab_2);
+            app.BandwidthEditField_4Label.Position = [22 10 62 22];
+            app.BandwidthEditField_4Label.Text = 'Bandwidth';
+
+            % Create BandwidthEditField_4
+            app.BandwidthEditField_4 = uieditfield(app.SignalTab_2, 'numeric');
+            app.BandwidthEditField_4.Position = [122 10 83 22];
+            app.BandwidthEditField_4.Value = 1e-10;
+
+            % Create WavelengthEditField_7Label
+            app.WavelengthEditField_7Label = uilabel(app.SignalTab_2);
+            app.WavelengthEditField_7Label.Position = [223 42 68 22];
+            app.WavelengthEditField_7Label.Text = 'Wavelength';
+
+            % Create WavelengthEditField_7
+            app.WavelengthEditField_7 = uieditfield(app.SignalTab_2, 'numeric');
+            app.WavelengthEditField_7.Position = [323 42 81 22];
+            app.WavelengthEditField_7.Value = 1550;
+
+            % Create PowerEditField_2Label
+            app.PowerEditField_2Label = uilabel(app.SignalTab_2);
+            app.PowerEditField_2Label.Position = [22 42 70 22];
+            app.PowerEditField_2Label.Text = 'Power';
+
+            % Create PowerEditField_2
+            app.PowerEditField_2 = uieditfield(app.SignalTab_2, 'numeric');
+            app.PowerEditField_2.Position = [122 42 80 22];
+            app.PowerEditField_2.Value = 0.001;
+
+            % Create BackscatteringEditField_6Label
+            app.BackscatteringEditField_6Label = uilabel(app.SignalTab_2);
+            app.BackscatteringEditField_6Label.Position = [623 42 84 22];
+            app.BackscatteringEditField_6Label.Text = 'Backscattering';
+
+            % Create BackscatteringEditField_6
+            app.BackscatteringEditField_6 = uieditfield(app.SignalTab_2, 'numeric');
+            app.BackscatteringEditField_6.Position = [713 42 78 22];
+            app.BackscatteringEditField_6.Value = 4.3e-08;
+
+            % Create AttenuationEditField_6Label
+            app.AttenuationEditField_6Label = uilabel(app.SignalTab_2);
+            app.AttenuationEditField_6Label.Position = [438 42 66 22];
+            app.AttenuationEditField_6Label.Text = 'Attenuation';
+
+            % Create AttenuationEditField_6
+            app.AttenuationEditField_6 = uieditfield(app.SignalTab_2, 'numeric');
+            app.AttenuationEditField_6.Position = [528 42 78 22];
+            app.AttenuationEditField_6.Value = 4.4e-05;
+
+            % Create FBGsTab_2
+            app.FBGsTab_2 = uitab(app.TabGroup2_2);
+            app.FBGsTab_2.Title = 'FBGs';
+
+            % Create FBGatbeginningofcavityCheckBox_2
+            app.FBGatbeginningofcavityCheckBox_2 = uicheckbox(app.FBGsTab_2);
+            app.FBGatbeginningofcavityCheckBox_2.Text = 'FBG at beginning of cavity';
+            app.FBGatbeginningofcavityCheckBox_2.Position = [20 42 163 22];
+
+            % Create FBGatendofcavityCheckBox_2
+            app.FBGatendofcavityCheckBox_2 = uicheckbox(app.FBGsTab_2);
+            app.FBGatendofcavityCheckBox_2.Text = 'FBG at end of cavity';
+            app.FBGatendofcavityCheckBox_2.Position = [20 12 131 22];
+
+            % Create R1EditField_2Label
+            app.R1EditField_2Label = uilabel(app.FBGsTab_2);
+            app.R1EditField_2Label.Position = [241 42 25 22];
+            app.R1EditField_2Label.Text = 'R1';
+
+            % Create R1EditField_2
+            app.R1EditField_2 = uieditfield(app.FBGsTab_2, 'numeric');
+            app.R1EditField_2.Position = [311 42 80 22];
+            app.R1EditField_2.Value = 0.99;
+
+            % Create R2EditField_2Label
+            app.R2EditField_2Label = uilabel(app.FBGsTab_2);
+            app.R2EditField_2Label.Position = [241 9 25 22];
+            app.R2EditField_2Label.Text = 'R2';
+
+            % Create R2EditField_2
+            app.R2EditField_2 = uieditfield(app.FBGsTab_2, 'numeric');
+            app.R2EditField_2.Position = [311 9 80 22];
+            app.R2EditField_2.Value = 0.99;
+
+            % Create BandwidthfreqEditFieldLabel
+            app.BandwidthfreqEditFieldLabel = uilabel(app.FBGsTab_2);
+            app.BandwidthfreqEditFieldLabel.HorizontalAlignment = 'right';
+            app.BandwidthfreqEditFieldLabel.Position = [459 42 97 22];
+            app.BandwidthfreqEditFieldLabel.Text = 'Bandwidth (freq.)';
+
+            % Create BandwidthfreqEditField
+            app.BandwidthfreqEditField = uieditfield(app.FBGsTab_2, 'numeric');
+            app.BandwidthfreqEditField.Position = [571 42 100 22];
+            app.BandwidthfreqEditField.Value = 125000000000;
+
+            % Create OthersTab_2
+            app.OthersTab_2 = uitab(app.TabGroup2_2);
+            app.OthersTab_2.Title = 'Others';
+
+            % Create TemperatureEditField_2Label
+            app.TemperatureEditField_2Label = uilabel(app.OthersTab_2);
+            app.TemperatureEditField_2Label.Position = [20 42 73 22];
+            app.TemperatureEditField_2Label.Text = 'Temperature';
+
+            % Create TemperatureEditField_2
+            app.TemperatureEditField_2 = uieditfield(app.OthersTab_2, 'numeric');
+            app.TemperatureEditField_2.Position = [120 42 78 22];
+            app.TemperatureEditField_2.Value = 298;
+
+            % Create InitialnoiseEditField_2Label
+            app.InitialnoiseEditField_2Label = uilabel(app.OthersTab_2);
+            app.InitialnoiseEditField_2Label.Position = [218 42 66 22];
+            app.InitialnoiseEditField_2Label.Text = 'Initial noise';
+
+            % Create InitialnoiseEditField_2
+            app.InitialnoiseEditField_2 = uieditfield(app.OthersTab_2, 'numeric');
+            app.InitialnoiseEditField_2.Position = [318 42 78 22];
+            app.InitialnoiseEditField_2.Value = 1e-06;
+
+            % Create ToleranceEditField_2Label
+            app.ToleranceEditField_2Label = uilabel(app.OthersTab_2);
+            app.ToleranceEditField_2Label.Position = [20 11 58 22];
+            app.ToleranceEditField_2Label.Text = 'Tolerance';
+
+            % Create ToleranceEditField_2
+            app.ToleranceEditField_2 = uieditfield(app.OthersTab_2, 'numeric');
+            app.ToleranceEditField_2.Position = [120 11 78 22];
+            app.ToleranceEditField_2.Value = 0.001;
+
+            % Create UIAxes2
+            app.UIAxes2 = uiaxes(app.SimulationTab);
+            title(app.UIAxes2, 'Title')
+            xlabel(app.UIAxes2, 'X')
+            ylabel(app.UIAxes2, 'Y')
+            app.UIAxes2.PlotBoxAspectRatio = [1.9978813559322 1 1];
+            app.UIAxes2.Position = [30 20 802 433];
+
+            % Create StartButton
+            app.StartButton = uibutton(app.SimulationTab, 'push');
+            app.StartButton.ButtonPushedFcn = createCallbackFcn(app, @StartButtonPushed, true);
+            app.StartButton.Position = [42 508 100 22];
+            app.StartButton.Text = 'Start';
+
+            % Create SaveButton
+            app.SaveButton = uibutton(app.SimulationTab, 'push');
+            app.SaveButton.Position = [700 496 100 22];
+            app.SaveButton.Text = 'Save';
+
+            % Create RunningLamp_2Label
+            app.RunningLamp_2Label = uilabel(app.SimulationTab);
+            app.RunningLamp_2Label.HorizontalAlignment = 'right';
+            app.RunningLamp_2Label.Position = [194 496 50 22];
+            app.RunningLamp_2Label.Text = 'Running';
+
+            % Create RunningLamp_2
+            app.RunningLamp_2 = uilamp(app.SimulationTab);
+            app.RunningLamp_2.Position = [259 498 18 18];
+
+            % Create LengthSpinner_2Label
+            app.LengthSpinner_2Label = uilabel(app.SimulationTab);
+            app.LengthSpinner_2Label.HorizontalAlignment = 'right';
+            app.LengthSpinner_2Label.Position = [335 496 42 22];
+            app.LengthSpinner_2Label.Text = 'Length';
+
+            % Create LengthSpinner_2
+            app.LengthSpinner_2 = uispinner(app.SimulationTab);
+            app.LengthSpinner_2.Position = [392 496 100 22];
+            app.LengthSpinner_2.Value = 100000;
+
+            % Create ToWorkspaceButton
+            app.ToWorkspaceButton = uibutton(app.SimulationTab, 'push');
+            app.ToWorkspaceButton.ButtonPushedFcn = createCallbackFcn(app, @ToWorkspaceButtonPushed, true);
+            app.ToWorkspaceButton.Position = [551 496 100 22];
+            app.ToWorkspaceButton.Text = 'To Workspace';
+
+            % Create AbortButton_2
+            app.AbortButton_2 = uibutton(app.SimulationTab, 'push');
+            app.AbortButton_2.ButtonPushedFcn = createCallbackFcn(app, @AbortButton_2Pushed, true);
+            app.AbortButton_2.Position = [43 467 100 22];
+            app.AbortButton_2.Text = 'Abort';
+
+            % Show the figure after all components are created
+            app.QuasiLosslesssystemsimulatorUIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = QLSSv16
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.QuasiLosslesssystemsimulatorUIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.QuasiLosslesssystemsimulatorUIFigure)
+        end
+    end
+end
